@@ -1,15 +1,15 @@
 package com.xiyou.advance.modulesbase.libbase.util
 
-import com.google.gson.Gson
+import com.squareup.moshi.Moshi
 import java.lang.ref.WeakReference
 
-class GSON {
+class MOSHI {
     companion object{
-        private var instance : WeakReference<Gson>? = null
-        fun getInstance(): WeakReference<Gson>
+        private var instance : WeakReference<Moshi>? = null
+        fun getInstance(): WeakReference<Moshi>
         {
             if (instance == null || instance!!.get() == null)
-                instance = WeakReference(Gson())
+                instance = WeakReference(Moshi.Builder().build())
 
             return instance!!
         }

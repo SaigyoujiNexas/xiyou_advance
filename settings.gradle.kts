@@ -13,3 +13,5 @@ include(":modulesBase:libBase")
 include(":modulesPublic:common")
 
 include(":modulesCore:main")
+include(":modulesCore:community")
+include(":modulesCore:account")

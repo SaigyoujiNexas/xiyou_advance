@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/nav_frag_community"
+    android:id="@+id/nav_community">
+    <activity
+        android:name="com.xiyou.community.CommunityActivity"
+        android:id="@+id/nav_act_community"
+        android:label="Community Activity">
+        <deepLink app:uri="xiyou://advance/community"/>
+    </activity>
+    <fragment
+        android:name="com.xiyou.community.CommunityFragment"
+        android:id="@+id/nav_frag_community"
+        />
+</navigation>

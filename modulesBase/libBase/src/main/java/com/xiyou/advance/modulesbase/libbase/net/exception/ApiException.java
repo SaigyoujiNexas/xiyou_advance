@@ -1,6 +1,9 @@
 package com.xiyou.advance.modulesbase.libbase.net.exception;
 
-import com.google.gson.JsonParseException;
+
+import com.squareup.moshi.JsonDataException;
+import com.squareup.moshi.JsonEncodingException;
+import com.squareup.moshi.Moshi;
 
 import org.json.JSONException;
 
@@ -8,6 +11,8 @@ import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.text.ParseException;
+
+import retrofit2.converter.moshi.MoshiConverterFactory;
 
 public class ApiException extends Exception {
     private static final int UNKNOWN_ERROR = -0x10;
@@ -43,7 +48,8 @@ public class ApiException extends Exception {
             return (ApiException)e;
         }
         ApiException ex;
-        if(e instanceof JsonParseException ||
+        if(e instanceof JsonDataException ||
+                e instanceof JsonEncodingException ||
         e instanceof JSONException ||
         e instanceof ParseException)
         {
