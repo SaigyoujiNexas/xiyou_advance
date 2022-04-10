@@ -1,6 +1,6 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
+    id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
 }
 android {
@@ -14,11 +14,7 @@ android {
         versionName = androidC["versionName"] as String
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions{
-            annotationProcessorOptions {
 
-            }
-        }
     }
     buildFeatures{
         viewBinding = true
