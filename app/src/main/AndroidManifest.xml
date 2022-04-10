@@ -3,10 +3,10 @@
     package="com.xiyou.advance">
 
     <application
-        android:name=".BaseApplication"
+        android:name=".modulespublic.common.base.BaseApplication"
          >
         <activity
-            android:name=".MainActivity"
+            android:name=".StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

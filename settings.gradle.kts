@@ -12,3 +12,4 @@ include(":app")
 include(":modulesBase:libBase")
 include(":modulesPublic:common")
 
+include(":modulesCore:main")
