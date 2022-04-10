@@ -1,19 +1,20 @@
 plugins {
-    id("kotlin-android")
     id("com.android.library")
+    id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
 }
 var versionCode : Int? = null
 var versionName : String? = null
 android {
-        compileSdk = androidC["compileSdk"] as Int
+
 
         defaultConfig {
+            compileSdk = androidC["compileSdk"] as Int
             minSdk = androidC["minSdk"] as Int
             targetSdk = androidC["targetSdk"] as Int
             versionCode = androidC["versionCode"] as Int
             versionName = androidC["versionName"] as String
-
+            buildToolsVersion = androidC["buildToolsVersion"] as String
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             consumerProguardFiles("consumer-rules.pro")
 
@@ -26,9 +27,6 @@ android {
         viewBinding = true
         dataBinding = true
     }
-
-
-
         buildTypes {
             release {
                 isMinifyEnabled = false
@@ -39,6 +37,9 @@ android {
             sourceCompatibility(javaVersion)
             targetCompatibility(javaVersion)
         }
+    kotlinOptions{
+        jvmTarget = JvmTarget
+    }
     }
 
     dependencies {

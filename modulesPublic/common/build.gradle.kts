@@ -11,7 +11,7 @@ var versionName: String? = null
         defaultConfig {
             minSdk = androidC["minSdk"] as Int
             targetSdk = androidC["targetSdk"] as Int
-
+            buildToolsVersion = androidC["buildToolsVersion"] as String
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             consumerProguardFiles("consumer-rules.pro")
 

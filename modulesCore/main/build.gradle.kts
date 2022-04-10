@@ -13,6 +13,7 @@ android {
     val applicationId: String = applicationIds["main"]!!
     var versionName: String = androidC["versionName"] as String
     var versionCode: Int = androidC["versionCode"] as Int
+    buildToolsVersion = androidC["buildToolsVersion"] as String
     defaultConfig {
         minSdk = androidC["minSdk"] as Int
         targetSdk = androidC["targetSdk"] as Int

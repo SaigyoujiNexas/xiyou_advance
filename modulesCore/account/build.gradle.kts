@@ -10,6 +10,7 @@ plugins {
 
 android {
     compileSdk = androidC["compileSdk"] as Int
+    buildToolsVersion = androidC["buildToolsVersion"] as String
     val applicationId: String = applicationIds["account"]!!
     var versionName: String = androidC["versionName"] as String
     var versionCode: Int = androidC["versionCode"] as Int

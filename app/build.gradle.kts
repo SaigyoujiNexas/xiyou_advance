@@ -5,7 +5,7 @@ plugins {
 }
 android {
     compileSdk = androidC["compileSdk"] as Int
-
+    buildToolsVersion = androidC["buildToolsVersion"] as String
     defaultConfig {
         applicationId = applicationIds["app"]
         minSdk = androidC["minSdk"] as Int
@@ -30,8 +30,9 @@ android {
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
     }
-
-    buildToolsVersion = androidC["buildToolsVersion"] as String
+    kotlinOptions{
+        jvmTarget = JvmTarget
+    }
 }
 
 dependencies {
