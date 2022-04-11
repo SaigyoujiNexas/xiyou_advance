@@ -38,7 +38,7 @@ android {
 dependencies {
     if(!isDebug) {
         implementation(project(":modulesCore:account"))
-        implementation(project(":modulesCore:main"))
+        implementation(project(":modulesCore:homepage"))
         implementation(project(":modulesCore:community"))
     }
     implementation(project(":modulesPublic:common"))

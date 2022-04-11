@@ -8,6 +8,7 @@ import io.reactivex.Observable
 private const val TAG = "RequestModel"
 class RequestModel{
     companion object{
+        @JvmStatic
         fun <T> request(o : Observable<out NetResponse<T>>, lifecycleOwner: LifecycleOwner,
                         callback: NetCallback<T>
         ) {
