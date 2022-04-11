@@ -1,10 +1,11 @@
-package com.xiyou.community.view.ui
+package com.xiyou.community.view.ui.fragment
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xiyou.community.R
 import com.xiyou.community.data.net.QuestionData
@@ -40,6 +41,7 @@ class CommunityFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         val v = inflater.inflate(R.layout.fragment_community, container, false)
         // Inflate the layout for this fragment
         for(i in 0 until 10)
@@ -64,6 +66,16 @@ class CommunityFragment : Fragment() {
         return v
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_community, menu)
+        val searchManager = context?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+            (menu.findItem(R.id.search_community).actionView as SearchView).apply {
+                setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+                setIconifiedByDefault(true)
+            }
+
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -83,4 +95,5 @@ class CommunityFragment : Fragment() {
                 }
             }
     }
+
 }

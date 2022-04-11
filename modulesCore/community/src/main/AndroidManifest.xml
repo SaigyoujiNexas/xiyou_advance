@@ -1,13 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xiyou.community">
+<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="com.xiyou.community">
 
-    <application>
-        <activity
-            android:name=".CommunityActivity"
-            android:exported="true">
-            <nav-graph android:value="@navigation/nav_community"/>
-        </activity>
-    </application>
-
+<application>
+    <activity
+        android:name=".CommunityActivity"
+        android:exported="true">
+        <nav-graph android:value="@navigation/nav_community" />
+    </activity>
+    <activity
+        android:name="com.xiyou.community.view.ui.activity.SearchActivity"
+        android:exported="false">
+        <intent-filter>
+            <action android:name="android.intent.action.SEARCH"/>
+        </intent-filter>
+        <meta-data android:name="android.app.searchable"
+            android:resource="@xml/searchable"/>
+    </activity>
+</application>
 </manifest>
