@@ -11,7 +11,6 @@ rootProject.name = "行之"
 include(":app")
 include(":modulesBase:libBase")
 include(":modulesPublic:common")
-
-include(":modulesCore:main")
+include(":modulesCore:homepage")
 include(":modulesCore:community")
 include(":modulesCore:account")
