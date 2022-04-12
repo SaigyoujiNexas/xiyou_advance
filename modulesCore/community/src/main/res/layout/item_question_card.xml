@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="24dp"
+    android:clickable="true"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -10,13 +11,11 @@
         android:layout_width="match_parent"
         android:layout_margin="12dp"
         android:layout_height="wrap_content">
-
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_question_card_head"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="8dp"
-
             android:scaleType="centerCrop"
             android:src="@mipmap/img_user"
             app:layout_constraintBottom_toBottomOf="parent"
