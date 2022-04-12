@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xiyou.main">
+    package="com.xiyou.homepage">
 
     <application>
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:name=".undertake.UndertakeActivity"
+            android:exported="true" />
     </application>
+
 </manifest>

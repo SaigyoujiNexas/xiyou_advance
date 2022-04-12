@@ -1,4 +1,4 @@
-package com.xiyou.main
+package com.xiyou.homepage
 
 import org.junit.Test
 

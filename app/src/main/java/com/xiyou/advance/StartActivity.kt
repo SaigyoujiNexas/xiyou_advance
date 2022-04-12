@@ -26,7 +26,7 @@ class StartActivity : AppCompatActivity() {
             .findFragmentById(R.id.fragment_container) as NavHostFragment? ?: return
         val navController = host.navController
         appBarConfig = AppBarConfiguration(
-            setOf(R.id.nav_main, R.id.nav_community), null)
+            setOf(com.xiyou.homepage.R.id.nav_homepage, R.id.nav_community, com.xiyou.community.R.id.nav_community), null)
         setUpActionBar(navController, appBarConfig)
         setupNavigationMenu(navController)
         setupBottomNavMenu(navController)

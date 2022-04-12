@@ -12,6 +12,7 @@
         android:background="@color/colorPrimary"
         android:theme="@style/Widget.Material3.ActionBar.Solid"
         android:id="@+id/toolbar"/>
+
 <androidx.fragment.app.FragmentContainerView
     android:layout_width="match_parent"
     android:layout_height="0dp"

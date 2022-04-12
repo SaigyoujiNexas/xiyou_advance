@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xiyou.main">
+    package="com.xiyou.homepage">
 
     <application
         android:name="com.xiyou.advance.modulespublic.common.base.BaseApplication"
         >
         <activity
-            android:name=".MainActivity"
+            android:name=".undertake.UndertakeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
