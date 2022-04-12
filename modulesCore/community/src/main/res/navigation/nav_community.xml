@@ -11,6 +11,7 @@
         <deepLink app:uri="xiyou://advance/community"/>
     </activity>
     <fragment
+        android:label="社区"
         tools:layout="@layout/fragment_community"
         android:name="com.xiyou.community.view.ui.fragment.CommunityFragment"
         android:id="@+id/nav_frag_community"

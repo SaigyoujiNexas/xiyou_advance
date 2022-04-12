@@ -6,6 +6,8 @@ import android.os.Build
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.google.android.material.card.MaterialCardView
+import com.xiyou.advance.modulespublic.common.utils.ToastUtil
 import com.xiyou.community.data.net.QuestionData
 import com.xiyou.community.data.ui.QuestionCard
 import java.util.*
@@ -17,6 +19,7 @@ class QuestionCardAdapter(diffCallback: DiffUtil.ItemCallback<QuestionData>)
     }
 
     override fun onBindViewHolder(holder: QuestionCardViewHolder, position: Int) {
+
         val item = getItem(position)
 
         val date =

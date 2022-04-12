@@ -11,11 +11,13 @@
         <entry key="..\:/Android_series/xiyou_advance/modulesCore/account/src/main/res/layout/activity_account.xml" value="0.1" />
         <entry key="..\:/Android_series/xiyou_advance/modulesCore/account/src/main/res/layout/fragment_account.xml" value="0.1" />
         <entry key="..\:/Android_series/xiyou_advance/modulesCore/community/src/main/res/drawable/ic_baseline_question_answer_24.xml" value="0.1045" />
+        <entry key="..\:/Android_series/xiyou_advance/modulesCore/community/src/main/res/drawable/ic_edit.xml" value="0.1305" />
         <entry key="..\:/Android_series/xiyou_advance/modulesCore/community/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Android_series/xiyou_advance/modulesCore/community/src/main/res/layout/activity_community.xml" value="0.1" />
         <entry key="..\:/Android_series/xiyou_advance/modulesCore/community/src/main/res/layout/activity_search.xml" value="0.12952898550724637" />
-        <entry key="..\:/Android_series/xiyou_advance/modulesCore/community/src/main/res/layout/fragment_community.xml" value="0.2" />
-        <entry key="..\:/Android_series/xiyou_advance/modulesCore/community/src/main/res/layout/item_question_card.xml" value="0.536" />
+        <entry key="..\:/Android_series/xiyou_advance/modulesCore/community/src/main/res/layout/fragment_community.xml" value="0.1" />
+        <entry key="..\:/Android_series/xiyou_advance/modulesCore/community/src/main/res/layout/item_question_card.xml" value="0.45073375262054505" />
+        <entry key="..\:/Android_series/xiyou_advance/modulesCore/community/src/main/res/layout/view_release.xml" value="0.2619047619047619" />
         <entry key="..\:/Android_series/xiyou_advance/modulesCore/community/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
         <entry key="..\:/Android_series/xiyou_advance/modulesCore/community/src/main/res/menu/menu_community.xml" value="0.536" />
         <entry key="..\:/Android_series/xiyou_advance/modulesCore/main/src/main/res/layout/fragment_main.xml" value="0.1" />

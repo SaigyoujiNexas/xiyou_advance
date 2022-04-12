@@ -9,7 +9,6 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
         android:theme="@style/Widget.Material3.ActionBar.Solid"
         android:id="@+id/toolbar"/>
 <androidx.fragment.app.FragmentContainerView
@@ -25,7 +24,6 @@
         android:id="@+id/bottom_nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbarSize="12dp"
         app:labelVisibilityMode="selected"
         app:menu="@menu/bottom_nav_menu" />
 </LinearLayout>
