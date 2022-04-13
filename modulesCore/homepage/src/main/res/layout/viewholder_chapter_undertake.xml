@@ -4,7 +4,6 @@
     android:layout_height="50dp"
     android:background="#eff7e9"
     android:orientation="horizontal">
-
     <TextView
         android:id="@+id/tv_item_chapter_name"
         android:layout_width="0dp"
