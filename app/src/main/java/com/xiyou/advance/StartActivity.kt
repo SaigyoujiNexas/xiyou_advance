@@ -29,7 +29,9 @@ class StartActivity : AppCompatActivity() {
         val navController = host.navController
         navController.addOnDestinationChangedListener{controller, dest, agrs ->
             findViewById<BottomNavigationView>(R.id.bottom_nav_view).let {
-                if (dest.id != com.xiyou.main.R.id.nav_frag_homepage && dest.id != com.xiyou.community.R.id.nav_frag_community) {
+                if (dest.id != com.xiyou.homepage.R.id.nav_frag_homepage
+                    && dest.id != com.xiyou.community.R.id.nav_frag_community
+                    && dest.id != com.xiyou.advance.account.R.id.nav_frag_account) {
                     it.visibility = View.GONE
                 }
                 else {
@@ -40,7 +42,7 @@ class StartActivity : AppCompatActivity() {
             }
         }
         appBarConfig = AppBarConfiguration(
-            setOf(com.xiyou.main.R.id.nav_homepage, R.id.nav_community, com.xiyou.community.R.id.nav_community), null)
+            setOf(R.id.nav_homepage, R.id.nav_community, R.id.nav_account), null)
         setUpActionBar(navController, appBarConfig)
         setupNavigationMenu(navController)
         setupBottomNavMenu(navController)
