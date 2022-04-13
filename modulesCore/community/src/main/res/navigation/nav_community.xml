@@ -5,15 +5,28 @@
     app:startDestination="@id/nav_frag_community"
     android:id="@+id/nav_community">
     <activity
-        android:name="com.xiyou.community.CommunityActivity"
+        android:name="com.xiyou.community.DisguessActivity"
         android:id="@+id/nav_act_community"
         android:label="Community Activity">
         <deepLink app:uri="xiyou://advance/community"/>
     </activity>
     <fragment
+        android:name="com.xiyou.community.view.ui.fragment.QuestionReleaseFragment"
+        android:id="@+id/nav_frag_question_release"
+        tools:layout="@layout/fragment_question_release"
+        android:label="发布问题">
+
+    </fragment>
+    <fragment
         android:label="社区"
         tools:layout="@layout/fragment_community"
         android:name="com.xiyou.community.view.ui.fragment.CommunityFragment"
         android:id="@+id/nav_frag_community"
-        />
+        >
+        <action
+            android:id="@+id/action_community_to_question_release"
+            app:destination="@id/nav_frag_question_release"
+            app:popUpTo="@id/nav_frag_community"
+            app:popUpToInclusive="false" />
+    </fragment>
 </navigation>

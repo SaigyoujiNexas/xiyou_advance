@@ -4,8 +4,10 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xiyou.community.R
 import com.xiyou.community.data.net.QuestionData
@@ -28,22 +30,11 @@ class CommunityFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var list: List<QuestionData>
+
+    private lateinit var binding: FragmentCommunityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-        list = mutableListOf<QuestionData>()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        setHasOptionsMenu(true)
-        val v = inflater.inflate(R.layout.fragment_community, container, false)
-        // Inflate the layout for this fragment
+        list = mutableListOf()
         for(i in 0 until 10)
         {
             list += QuestionData(id = i, user = "Jack Gram", title = "Hello, World"
@@ -57,13 +48,32 @@ class CommunityFragment : Fragment() {
                 date = 1649668243
             )
         }
-        val binding = FragmentCommunityBinding.bind(v)
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        setHasOptionsMenu(true)
+        val v = inflater.inflate(R.layout.fragment_community, container, false)
+
+        binding = FragmentCommunityBinding.bind(v)
+        // Inflate the layout for this fragment
+        return v
+    }
+
+    override fun onResume() {
+        super.onResume()
         val rv = binding.rvCommunityQuestionCards
         rv.layoutManager = LinearLayoutManager(context)
         val adapter = QuestionCardAdapter(QuestionDiffCallback())
         rv.adapter = adapter
         adapter.submitList(list)
-        return v
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.fabCommunityEdit.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_community_to_question_release))
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -74,6 +84,10 @@ class CommunityFragment : Fragment() {
                 setIconifiedByDefault(true)
             }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
     companion object {
@@ -88,12 +102,7 @@ class CommunityFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            CommunityFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+            CommunityFragment()
     }
 
 }

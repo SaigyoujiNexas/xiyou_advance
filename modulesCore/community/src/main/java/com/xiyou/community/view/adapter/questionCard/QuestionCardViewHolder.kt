@@ -18,7 +18,10 @@ class QuestionCardViewHolder(val itemView: View):RecyclerView.ViewHolder(itemVie
     private val date : TextView = itemView.findViewById(R.id.tv_question_card_date)
     fun bind (question: QuestionCard)
     {
-        head.load(question.head)
+        head.load(question.head){
+            crossfade(true)
+            placeholder(R.mipmap.img_user)
+        }
         title.text = question.title
         content.text = question.content
         date.text = question.date
