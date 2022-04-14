@@ -6,9 +6,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xiyou.advance.modulespublic.common.net.CourseInfo;
 import com.xiyou.homepage.R;
 
+import java.util.List;
+
 public class Adapter_Undertake extends RecyclerView.Adapter{
+    List<CourseInfo> list;
+
+    public Adapter_Undertake(List<CourseInfo> list) {
+        this.list = list;
+    }
+
     public enum ItemType {
         ITEM0, ITEM1
     }

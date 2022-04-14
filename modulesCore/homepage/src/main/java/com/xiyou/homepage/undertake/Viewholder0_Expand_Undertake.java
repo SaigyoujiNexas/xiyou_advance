@@ -38,7 +38,8 @@ public class Viewholder0_Expand_Undertake extends RecyclerView.ViewHolder {
         Log.d(TAG,"1");
 
         mCourseInfo = new CourseInfo();
-        mCourseInfo.name = "假装是课程的名称";
+        mCourseInfo.imageid = com.advance.modulespublic.common.R.drawable.img0;
+        mCourseInfo.title = "课程的名称";
         mCourseInfo.chapterInfos = contentsList;
 //        for(int i=0; i< contentsList.size(); i++){
 //            ChapterInfo chapterInfo = new ChapterInfo();

@@ -2,6 +2,7 @@ package com.xiyou.homepage.pre;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xiyou.advance.modulespublic.common.net.CourseInfo;
+import com.xiyou.advance.modulespublic.common.net.GetRequest;
 import com.xiyou.homepage.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.moshi.MoshiConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +43,8 @@ public class HomePageFragment extends Fragment {
     private String mParam2;
     List<News_Homepage> newsList = new ArrayList<>();
     RecyclerView recyclerView;
+    final String TAG = "HomePageFragmentTAG";
+    private List<CourseInfo> courseList;
     public HomePageFragment() {
         // Required empty public constructor
     }
@@ -87,6 +98,24 @@ public class HomePageFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(new Adapter_HomepageRecycler(newsList));
+        initRetrofit();
         return view;
+    }
+    public void initRetrofit(){
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://8.142.65.201:8080").addConverterFactory(MoshiConverterFactory.create()).build();
+        GetRequest getRequest = retrofit.create(GetRequest.class);
+        Call<List<CourseInfo>> call = getRequest.getCourses();
+        call.enqueue(new Callback<List<CourseInfo>>() {
+            @Override
+            public void onResponse(Call<List<CourseInfo>> call, Response<List<CourseInfo>> response) {
+                Log.d(TAG,"onresponsebody:"+response.body()+",errorbody:"+response.errorBody()+",message:"+response.message());
+                courseList = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<CourseInfo>> call, Throwable t) {
+                Log.d(TAG,"error+"+t.toString());
+            }
+        });
     }
 }

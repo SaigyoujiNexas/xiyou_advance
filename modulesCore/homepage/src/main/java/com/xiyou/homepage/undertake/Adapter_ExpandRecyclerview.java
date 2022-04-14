@@ -33,13 +33,14 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
     private List<BaseInfo> dataInfos = new ArrayList<>();
     //当前展开的课时，-1代表没有任何展开
     private int curExpandChapterIndex = -1;
-
+    private int chapterCount = 1;
     public Adapter_ExpandRecyclerview(CourseInfo _courseInfo) {
         this.courseInfo = _courseInfo;
         for(BaseInfo info : courseInfo.chapterInfos){
             dataInfos.add(info);
         }
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
@@ -62,6 +63,8 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
             ChapterViewHolder itemHolder = (ChapterViewHolder) holder;
             itemHolder.itemView.setTag(position);
             ChapterInfo chapterInfo = (ChapterInfo) dataInfos.get(position);
+            itemHolder.tvNumber.setText("第"+chapterCount+++"章");
+            itemHolder.tvName.setText(chapterInfo.getTitle());
             if(chapterInfo.sectionInfos.size() > 0){
                 itemHolder.ivArrow.setVisibility(View.VISIBLE);
                 if(curExpandChapterIndex == position){
@@ -95,7 +98,7 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
                 if(getItemViewType(position) == VIEW_TYPE_CHAPTER){
                     ChapterViewHolder itemHolder = (ChapterViewHolder) holder;
                     itemHolder.itemView.setTag(position);
-                    itemHolder.tvPractise.setTag(position);
+                    itemHolder.tvNumber.setTag(position);
                     //改变箭头方向
                     if(curExpandChapterIndex == position){
                         itemHolder.ivArrow.setBackgroundResource(com.advance.modulespublic.common.R.drawable.arrow_up);
@@ -138,7 +141,7 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
         public LinearLayout llBg;
         public ImageView ivArrow;
         public TextView tvName;
-        public TextView tvPractise;
+        public TextView tvNumber;
         public LinearLayout llSection;
         public GridView gvSection;
 
@@ -146,11 +149,11 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
             super(itemView);
             ivArrow = (ImageView) itemView.findViewById(R.id.iv_item_chapter_arrow);
             tvName = (TextView) itemView.findViewById(R.id.tv_item_chapter_name);
-            tvPractise = (TextView) itemView.findViewById(R.id.tv_item_chapter_number);
+            tvNumber = (TextView) itemView.findViewById(R.id.tv_item_chapter_number);
 
             //将创建的View注册点击事件
             itemView.setOnClickListener(Adapter_ExpandRecyclerview.this);
-            tvPractise.setOnClickListener(Adapter_ExpandRecyclerview.this);
+            tvNumber.setOnClickListener(Adapter_ExpandRecyclerview.this);
         }
     }
 //

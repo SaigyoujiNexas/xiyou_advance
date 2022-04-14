@@ -10,14 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xiyou.advance.modulespublic.common.net.CourseInfo;
 import com.xiyou.homepage.R;
 
 import java.util.List;
 
 public class Adapter_HomepageRecycler extends RecyclerView.Adapter<Adapter_HomepageRecycler.ViewHolder> {
     List<News_Homepage> newsList;
-    public Adapter_HomepageRecycler(List<News_Homepage> newsList) {
+    private List<CourseInfo> courseList;
+    public Adapter_HomepageRecycler(List<News_Homepage> newsList,List<CourseInfo> courseList;) {
         this.newsList = newsList;
+        this.courseList = courseList;
     }
 
     @NonNull
@@ -32,8 +35,11 @@ public class Adapter_HomepageRecycler extends RecyclerView.Adapter<Adapter_Homep
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         News_Homepage news_homepage = newsList.get(position);
-        holder.item_hpr_img.setImageResource(news_homepage.getImg_newsHomepage());
-        holder.item_hpr_title.setText(news_homepage.getTitle_newsHomepage());
+        CourseInfo courseInfo = courseList.get(position);
+//        holder.item_hpr_img.setImageResource(news_homepage.getImg_newsHomepage());
+//        holder.item_hpr_title.setText(news_homepage.getTitle_newsHomepage());
+        holder.item_hpr_img.
+        holder.item_hpr_title.setText(courseInfo.title);
     }
 
 

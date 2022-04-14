@@ -24,13 +24,17 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.xiyou.advance.modulespublic.common.net.CourseInfo;
 import com.xiyou.homepage.R;
+
+import java.util.List;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
 public class UndertakeFragment extends Fragment {
+
     ImageView img_undertake;
     ViewPager2 viewpager2_undertake;
     TabLayout tab_undertake;
@@ -39,6 +43,7 @@ public class UndertakeFragment extends Fragment {
     final String[] tabs = {"简介","评论"};
     final String TAG = "UndertakeFragmentTAG";
     CardView edit_card_fragment;
+    private List<CourseInfo> courseList;
 
     @Nullable
     @Override
@@ -51,7 +56,7 @@ public class UndertakeFragment extends Fragment {
         img_undertake = view.findViewById(R.id.img_undertake);
         viewpager2_undertake = view.findViewById(R.id.viewpager2_undertake);
         tab_undertake = view.findViewById(R.id.tab_undertake);
-        Adapter_Undertake adapter_undertake  = new Adapter_Undertake();
+        Adapter_Undertake adapter_undertake  = new Adapter_Undertake(courseList);
         viewpager2_undertake.setAdapter(adapter_undertake);
         viewpager2_undertake.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         viewpager2_undertake.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -129,5 +134,7 @@ public class UndertakeFragment extends Fragment {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     1);
         }
+
     }
+
 }
