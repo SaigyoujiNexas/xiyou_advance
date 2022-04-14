@@ -41,6 +41,7 @@ class StartActivity : AppCompatActivity() {
                 }
             }
         }
+
         appBarConfig = AppBarConfiguration(
             setOf(R.id.nav_homepage, R.id.nav_community, R.id.nav_account), null)
         setUpActionBar(navController, appBarConfig)

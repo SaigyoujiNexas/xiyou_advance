@@ -4,12 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/nav_frag_community"
     android:id="@+id/nav_community">
-    <activity
-        android:name="com.xiyou.community.DisguessActivity"
-        android:id="@+id/nav_act_community"
-        android:label="Community Activity">
-        <deepLink app:uri="xiyou://advance/community"/>
-    </activity>
     <fragment
         android:name="com.xiyou.community.view.ui.fragment.QuestionReleaseFragment"
         android:id="@+id/nav_frag_question_release"
@@ -28,5 +22,24 @@
             app:destination="@id/nav_frag_question_release"
             app:popUpTo="@id/nav_frag_community"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_community_to_questionInfo"
+            app:destination="@id/questionInfoFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_frag_community"
+            app:popUpToInclusive="false">"
+            <argument
+                android:name="question"
+                app:argType="com.xiyou.community.data.ui.QuestionCard" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/questionInfoFragment"
+        android:name="com.xiyou.community.view.ui.fragment.QuestionInfoFragment"
+        android:label="问题详情"
+        tools:layout="@layout/fragment_question_info">
+        <argument
+            android:name="question"
+            app:argType="com.xiyou.community.data.ui.QuestionCard"/>
     </fragment>
 </navigation>

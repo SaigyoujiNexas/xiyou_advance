@@ -4,13 +4,13 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xiyou.community.R
-import com.xiyou.community.data.net.QuestionData
+import com.xiyou.community.data.ui.QuestionAnswer
+import com.xiyou.community.data.ui.QuestionCard
 import com.xiyou.community.databinding.FragmentCommunityBinding
 import com.xiyou.community.view.adapter.questionCard.QuestionCardAdapter
 import com.xiyou.community.view.adapter.questionCard.QuestionDiffCallback
@@ -29,15 +29,20 @@ class CommunityFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var list: List<QuestionData>
+    private lateinit var list: List<QuestionCard>
 
     private lateinit var binding: FragmentCommunityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         list = mutableListOf()
+        val answer  = mutableListOf<QuestionAnswer>();
+        for(i in 0 until 5)
+        {
+            answer += QuestionAnswer(id = i, date = 1649668243, content = "Item $i",name = "Temp", head = "https://i1.hdslb.com/bfs/face/130f111812e082c13d7c8b2232231a122957aa20.jpg@240w_240h_1c_1s.webp")
+        }
         for(i in 0 until 10)
         {
-            list += QuestionData(id = i, user = "Jack Gram", title = "Hello, World"
+            list += QuestionCard(id = i, user = "Jack Gram", title = "Hello, World"
                 , content = "Use this factory method to create a new instance of\n" +
                         "* this fragment using the provided parameters.\n" +
                         "*\n" +
@@ -45,7 +50,9 @@ class CommunityFragment : Fragment() {
                         "* @param param2 Parameter 2.\n" +
                         "* @return A new instance of fragment CommunityFragment.",
                 head = "https://i1.hdslb.com/bfs/face/130f111812e082c13d7c8b2232231a122957aa20.jpg@240w_240h_1c_1s.webp",
-                date = 1649668243
+                date = 1649668243,
+                isSolved = i % 2 != 0,
+                answer = answer
             )
         }
     }
@@ -54,11 +61,9 @@ class CommunityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-        val v = inflater.inflate(R.layout.fragment_community, container, false)
+        binding = FragmentCommunityBinding.inflate(inflater, container, false)
 
-        binding = FragmentCommunityBinding.bind(v)
-        // Inflate the layout for this fragment
-        return v
+        return binding.root
     }
 
     override fun onResume() {
