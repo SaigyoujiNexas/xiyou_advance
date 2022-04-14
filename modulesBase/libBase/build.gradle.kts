@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
+    id("kotlin-kapt")
 }
 var versionCode : Int? = null
 var versionName : String? = null
@@ -46,8 +47,8 @@ android {
         libraryC.forEach{ (_, v) -> implementation(v)}
         libs.forEach { s -> implementation(s) }
         tests.forEach { t -> androidTestImplementation(t) }
-        apts.forEach { s -> annotationProcessor(s) }
-
+        apts.forEach { s -> kapt(s) }
+        libKtx.forEach { s -> implementation(s) }
 
         testImplementation("junit:junit:4.+")
         androidTestImplementation("androidx.test.ext:junit:1.1.3")

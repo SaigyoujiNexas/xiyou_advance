@@ -15,7 +15,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StartActivity : AppCompatActivity() {
     private lateinit var appBarConfig: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +43,7 @@ class StartActivity : AppCompatActivity() {
                 }
             }
         }
+
         appBarConfig = AppBarConfiguration(
             setOf(R.id.nav_homepage, R.id.nav_community, R.id.nav_account), null)
         setUpActionBar(navController, appBarConfig)

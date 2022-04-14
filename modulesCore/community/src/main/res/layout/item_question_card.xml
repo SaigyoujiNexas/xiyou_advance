@@ -24,25 +24,28 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/tv_question_card_title"
             android:layout_width="0dp"
-            android:textSize="21sp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="45dp"
             android:maxLines="1"
             android:text="Hello, World!"
-            android:id="@+id/tv_question_card_title"
+            android:textSize="21sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Hello, World!"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Hello, World!" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_question_card_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="3"
-            app:layout_constraintTop_toBottomOf="@+id/tv_question_card_title"
             android:text="Do you have any body to help me?\n
 Do you have any body to help me?"
-            android:id="@+id/tv_question_card_content"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_question_card_title" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,5 +63,15 @@ Do you have any body to help me?"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginEnd="12dp"/>
+
+        <ImageView
+            android:id="@+id/iv_question_card_solved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_question_card_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_question_card_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_red_check_circle" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
