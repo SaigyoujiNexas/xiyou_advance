@@ -1,6 +1,5 @@
 package com.xiyou.homepage.pre;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,16 +7,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xiyou.homepage.R;
-import com.xiyou.homepage.undertake.UndertakeActivity;
 
 import java.util.List;
 
 public class Adapter_HomepageRecycler extends RecyclerView.Adapter<Adapter_HomepageRecycler.ViewHolder> {
     List<News_Homepage> newsList;
-
     public Adapter_HomepageRecycler(List<News_Homepage> newsList) {
         this.newsList = newsList;
     }
@@ -27,12 +25,7 @@ public class Adapter_HomepageRecycler extends RecyclerView.Adapter<Adapter_Homep
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_homepagerecyclerview,parent,false);
        ViewHolder viewHolder =  new ViewHolder(view);
-       view.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               parent.getContext().startActivity(new Intent(parent.getContext(), UndertakeActivity.class));
-           }
-       });
+       view.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homepage_to_undertake));
        return viewHolder;
     }
 

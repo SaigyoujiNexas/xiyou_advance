@@ -69,7 +69,7 @@
     <color name="sport_bg">#0ba78c</color>
     <color name="center_sport_bg">#550ba78c</color>
     <color name="end_sport_bg">#280ba78c</color>
-
+    <color name="lil_green">#eff7e9</color>
     <color name="btn_green_p">#49B557</color>
     <color name="btn_green_n">#01BF71</color>
     <color name="lightGrayBkg">#EDEDED</color>

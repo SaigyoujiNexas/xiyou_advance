@@ -2,11 +2,15 @@ package com.xiyou.homepage.undertake;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textview.MaterialTextView;
 import com.xiyou.homepage.R;
 
 import java.util.ArrayList;
@@ -15,11 +19,16 @@ import java.util.List;
 public class Viewholder1_Expand_Undertake extends RecyclerView.ViewHolder {
     RecyclerView mRecyclerView;
     Context context;
-    final String TAG = "Viewholder0TAG";
     List<Comment_Course> list = new ArrayList<>();
+    EditText editText_comment;
+    MaterialTextView sendtext;
+    FloatingActionButton commentEdit;
+    final String TAG = "Viewholder1TAG";
+    CardView cardView;
     public Viewholder1_Expand_Undertake(@NonNull View itemView, Context context) {
         super(itemView);
         this.context = context;
+
         mRecyclerView = itemView.findViewById(R.id.recycler_viewholder1_undertake);
         initView();
         Adapter_Viewholder1_Undertake adapter_viewholder1_undertake = new Adapter_Viewholder1_Undertake(list);
@@ -27,6 +36,8 @@ public class Viewholder1_Expand_Undertake extends RecyclerView.ViewHolder {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         mRecyclerView.setAdapter(adapter_viewholder1_undertake);
         mRecyclerView.setLayoutManager(linearLayoutManager);
+        sendtext = itemView.findViewById(R.id.sendtext_viewholder1_undertake);
+
     }
 
     void initView(){

@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xiyou.advance.modulespublic.common.net.BaseInfo;
+import com.xiyou.advance.modulespublic.common.net.ChapterInfo;
+import com.xiyou.advance.modulespublic.common.net.CourseInfo;
+import com.xiyou.advance.modulespublic.common.net.SectionInfo;
 import com.xiyou.homepage.R;
 
 import java.util.ArrayList;
@@ -41,7 +45,7 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
         View itemView;
         if(viewType == VIEW_TYPE_CHAPTER){
             itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.viewholder_chapter_undertake, parent, false);
+                    .inflate(R.layout.item_chapter_undertake, parent, false);
             return new ChapterViewHolder(itemView);
         }else{
             itemView = LayoutInflater.from(parent.getContext())
@@ -142,7 +146,7 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
             super(itemView);
             ivArrow = (ImageView) itemView.findViewById(R.id.iv_item_chapter_arrow);
             tvName = (TextView) itemView.findViewById(R.id.tv_item_chapter_name);
-            tvPractise = (TextView) itemView.findViewById(R.id.tv_item_chapter_practise);
+            tvPractise = (TextView) itemView.findViewById(R.id.tv_item_chapter_number);
 
             //将创建的View注册点击事件
             itemView.setOnClickListener(Adapter_ExpandRecyclerview.this);
@@ -194,7 +198,7 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
                 ChapterInfo chapterInfo = (ChapterInfo) dataInfos.get(position);
                 chapterIndex = chapterInfo.chapterIndex;
                 sectionIndex = -1;
-                if(v.getId() == R.id.tv_item_chapter_practise){
+                if(v.getId() == R.id.tv_item_chapter_number){
                     viewName = ViewName.CHAPTER_ITEM_PRACTISE;
                 }else{
                     viewName = ViewName.CHAPTER_ITEM;

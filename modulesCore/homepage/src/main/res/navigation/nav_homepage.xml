@@ -8,5 +8,16 @@
         android:id="@+id/nav_frag_homepage"
         android:name="com.xiyou.homepage.pre.HomePageFragment"
         tools:layout="@layout/fragment_homepage"
-        android:label="HomeFragment"/>
+        android:label="HomeFragment">
+        <action
+            android:id="@+id/action_homepage_to_undertake"
+            app:destination="@id/undertakeFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_rignt" />
+    </fragment>
+    <fragment
+        android:id="@+id/undertakeFragment"
+        android:label="undertakeFragment"
+        tools:layout="@layout/fragment_undertake"
+        android:name="com.xiyou.homepage.undertake.UndertakeFragment" />
 </navigation>

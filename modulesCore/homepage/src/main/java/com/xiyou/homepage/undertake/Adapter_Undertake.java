@@ -29,8 +29,7 @@ public class Adapter_Undertake extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof Viewholder0_Expand_Undertake){
-            ((Viewholder0_Expand_Undertake) holder).initData();
-            ((Viewholder0_Expand_Undertake) holder).initViews();
+            ((Viewholder0_Expand_Undertake) holder).initRetrofit();
         }else if(holder instanceof Viewholder1_Expand_Undertake){
             ((Viewholder1_Expand_Undertake) holder).initView();
         }
