@@ -1,53 +1,15 @@
-package com.xiyou.advance.modulespublic.common.net;
+package com.xiyou.advance.modulespublic.common.net
 
-import com.xiyou.advance.modulesbase.libbase.net.response.NetResponse;
+import com.xiyou.advance.modulesbase.libbase.net.response.NetResponse
 
-public class BaseResponse<T> implements NetResponse<T> {
-    T data;
-    int code;
-    String message;
-    public BaseResponse(T data, int code, String msg) {
-        this.data = data;
-        this.code = code;
-        this.message = msg;
+data class BaseResponse<T>(private val data: T, private val code: Int, private val message: String) : NetResponse<T> {
+    override fun isSuccess(): Boolean {
+        return code != 200
     }
 
-    public void setData(T data) {
-        this.data = data;
-    }
+    override fun getData() = data
 
-    public void setCode(int code) {
-        this.code = code;
-    }
+    override fun getMsg() =message
 
-    public void setMsg(String msg) {
-        this.message = msg;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-    @Override
-    public T getData() {
-        return data;
-    }
-
-    @Override
-    public String getMsg() {
-        return message;
-    }
-
-    @Override
-    public String getCode() {
-        return String.valueOf(code);
-    }
-
-    @Override
-    public boolean isSuccess() {
-        return code != 200;
-    }
+    override fun getCode() = code.toString()
 }

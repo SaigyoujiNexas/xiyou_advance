@@ -1,4 +1,4 @@
-package com.xiyou.community.view.ui.fragment
+package com.xiyou.community.view.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.xiyou.community.R
 import com.xiyou.community.data.ui.QuestionCard
 import com.xiyou.community.databinding.FragmentQuestionInfoBinding
 import com.xiyou.community.view.adapter.questionAnswer.QuestionAnswerAdapter

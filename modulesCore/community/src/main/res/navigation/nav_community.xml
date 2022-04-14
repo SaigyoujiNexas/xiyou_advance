@@ -5,7 +5,7 @@
     app:startDestination="@id/nav_frag_community"
     android:id="@+id/nav_community">
     <fragment
-        android:name="com.xiyou.community.view.ui.fragment.QuestionReleaseFragment"
+        android:name="com.xiyou.community.view.ui.QuestionReleaseFragment"
         android:id="@+id/nav_frag_question_release"
         tools:layout="@layout/fragment_question_release"
         android:label="发布问题">
@@ -14,7 +14,7 @@
     <fragment
         android:label="社区"
         tools:layout="@layout/fragment_community"
-        android:name="com.xiyou.community.view.ui.fragment.CommunityFragment"
+        android:name="com.xiyou.community.view.ui.CommunityFragment"
         android:id="@+id/nav_frag_community"
         >
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/questionInfoFragment"
-        android:name="com.xiyou.community.view.ui.fragment.QuestionInfoFragment"
+        android:name="com.xiyou.community.view.ui.QuestionInfoFragment"
         android:label="问题详情"
         tools:layout="@layout/fragment_question_info">
         <argument

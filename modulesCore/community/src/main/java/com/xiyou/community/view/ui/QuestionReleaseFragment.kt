@@ -1,4 +1,4 @@
-package com.xiyou.community.view.ui.fragment
+package com.xiyou.community.view.ui
 
 import android.os.Bundle
 import android.os.Handler

@@ -15,7 +15,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StartActivity : AppCompatActivity() {
     private lateinit var appBarConfig: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {

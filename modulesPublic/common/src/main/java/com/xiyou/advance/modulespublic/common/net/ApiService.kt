@@ -1,30 +1,27 @@
-package com.xiyou.advance.modulespublic.common.net;
+package com.xiyou.advance.modulespublic.common.net
 
-import io.reactivex.Observable;
-import okhttp3.MultipartBody;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Multipart;
-import retrofit2.http.POST;
-import retrofit2.http.Part;
-import retrofit2.http.Query;
+import com.xiyou.advance.modulespublic.common.net.BaseResponse
+import com.xiyou.advance.modulespublic.common.net.ApiService
+import io.reactivex.Observable
+import retrofit2.http.*
 
-public interface ApiService {
-
-    static final String SET_USER_INFO = "set/user_info";
+interface ApiService {
     @GET("/INDEX.TXT")
-    public Observable<BaseResponse<String>> test();
+    fun test(): Observable<BaseResponse<String?>?>?
 
     @Multipart
     @POST(SET_USER_INFO)
-    public Observable<BaseResponse<String>> setUserInfo
-            (
-                    @Header("token") String token,
-                    @Part MultipartBody.Part head,
-                    @Query("name") String name,
-                    @Query("gender") String gender,
-                    @Query("birthday") String birthday,
-                    @Query("height") String height,
-                    @Query("weight") String weight
-            );
+    fun setUserInfo(
+        @Header("token") token: String?,
+        @Part head: Part?,
+        @Query("name") name: String?,
+        @Query("gender") gender: String?,
+        @Query("birthday") birthday: String?,
+        @Query("height") height: String?,
+        @Query("weight") weight: String?
+    ): Observable<BaseResponse<String?>?>?
+
+    companion object {
+        const val SET_USER_INFO = "set/user_info"
+    }
 }
