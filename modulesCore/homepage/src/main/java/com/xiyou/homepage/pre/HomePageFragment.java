@@ -150,6 +150,7 @@ public class HomePageFragment extends Fragment {
         });
     }
 
+    @Deprecated
     public void initRetrofit(){
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://8.142.65.201:8080").addConverterFactory(MoshiConverterFactory.create()).build();
         GetRequest getRequest = retrofit.create(GetRequest.class);
