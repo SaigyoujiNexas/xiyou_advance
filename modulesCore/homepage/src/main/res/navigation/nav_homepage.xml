@@ -12,12 +12,23 @@
         <action
             android:id="@+id/action_homepage_to_undertake"
             app:destination="@id/undertakeFragment"
-            app:enterAnim="@anim/slide_in_left"
+            app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_rignt" />
     </fragment>
     <fragment
         android:id="@+id/undertakeFragment"
         android:label="undertakeFragment"
         tools:layout="@layout/fragment_undertake"
-        android:name="com.xiyou.homepage.undertake.UndertakeFragment" />
+        android:name="com.xiyou.homepage.undertake.UndertakeFragment" >
+        <action
+            android:id="@+id/action_undertake_to_web_video"
+            app:destination="@id/web_video_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_rignt" />
+    </fragment>
+    <fragment
+        android:id="@+id/web_video_fragment"
+        android:label="web_video_fragment"
+        tools:layout="@layout/fragment_video"
+        android:name="com.xiyou.homepage.video.VideoFragment" />
 </navigation>

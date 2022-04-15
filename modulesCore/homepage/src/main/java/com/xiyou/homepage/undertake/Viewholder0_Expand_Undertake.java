@@ -26,7 +26,6 @@ public class Viewholder0_Expand_Undertake extends RecyclerView.ViewHolder {
     RecyclerView mRecyclerView;
     CourseInfo mCourseInfo;
     Context context;
-    List<ChapterInfo> contentsList;
     private List<CourseInfo> courseList;
     TextView title_viewholder0_undertake;
     final String TAG = "Viewholder0TAG";
@@ -45,7 +44,6 @@ public class Viewholder0_Expand_Undertake extends RecyclerView.ViewHolder {
                 ChapterInfo chapterInfo = courseInfo.list.get(j);
                 chapterInfo.setChapterIndex(j);
             }
-
         }
 
         //mCourseInfo.cover = contentsList.get(0);

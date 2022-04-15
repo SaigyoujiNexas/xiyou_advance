@@ -1,5 +1,6 @@
 package com.xiyou.homepage.undertake;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xiyou.advance.modulespublic.common.net.BaseInfo;
@@ -221,6 +224,11 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
                 viewName = ViewName.SECTION_ITEM;
                 chapterIndex = sectionInfo.chapterIndex;
                 sectionIndex = sectionInfo.sectionIndex;
+                NavController controller= Navigation.findNavController(v);
+                Bundle bundle=new Bundle();
+                bundle.putString("videoData",sectionInfo.url);
+                Log.d(TAG,"");
+                controller.navigate(R.id.action_undertake_to_web_video,bundle);
             }
             mOnItemClickListener.onClick(v, viewName, chapterIndex, sectionIndex);
         }

@@ -3,6 +3,7 @@
     package="com.xiyou.homepage">
     <uses-permission android:name="android.permission.INTERNET" />
     <application>
+
 <!--        <activity-->
 <!--            android:name=".undertake.UndertakeActivity"-->
 <!--            android:exported="true" />-->
