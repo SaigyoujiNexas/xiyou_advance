@@ -8,7 +8,7 @@
         android:id="@+id/nav_frag_homepage"
         android:name="com.xiyou.homepage.pre.HomePageFragment"
         tools:layout="@layout/fragment_homepage"
-        android:label="HomeFragment">
+        android:label="首页">
         <action
             android:id="@+id/action_homepage_to_undertake"
             app:destination="@id/undertakeFragment"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/undertakeFragment"
-        android:label="undertakeFragment"
+        android:label="课程"
         tools:layout="@layout/fragment_undertake"
         android:name="com.xiyou.homepage.undertake.UndertakeFragment" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/web_video_fragment"
-        android:label="web_video_fragment"
+        android:label="学习"
         tools:layout="@layout/fragment_video"
         android:name="com.xiyou.homepage.video.VideoFragment" />
 </navigation>
