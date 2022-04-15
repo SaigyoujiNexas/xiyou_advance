@@ -34,6 +34,7 @@ class CommunityFragment : Fragment() {
     private lateinit var binding: FragmentCommunityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.getAllQuestion()
 
     }
     override fun onCreateView(
@@ -45,19 +46,21 @@ class CommunityFragment : Fragment() {
 
         return binding.root
     }
-
     override fun onResume() {
         super.onResume()
-        val rv = binding.rvCommunityQuestionCards
-        rv.layoutManager = LinearLayoutManager(context)
-        val adapter = QuestionCardAdapter(QuestionDiffCallback())
-        rv.adapter = adapter
-        adapter.submitList(viewModel.list)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.fabCommunityEdit.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_community_to_question_release))
+        val rv = binding.rvCommunityQuestionCards
+        rv.layoutManager = LinearLayoutManager(context)
+        val adapter = QuestionCardAdapter(QuestionDiffCallback())
+        rv.adapter = adapter
+        viewModel.questions.observe(viewLifecycleOwner){
+            adapter.submitList(it)
+        }
 
     }
 

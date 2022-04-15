@@ -1,5 +1,7 @@
 package com.xiyou.community.viewModel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xiyou.advance.modulespublic.common.net.BaseResponse
@@ -20,57 +22,23 @@ class QuestionInfoViewModel
     constructor(val repository: CommunityRepository)
     : ViewModel() {
 
-    val list = mutableListOf<QuestionCard>()
-    val answer  = mutableListOf<QuestionAnswer>()
+    val list = MutableLiveData(listOf<QuestionCard>())
+    val questions: LiveData<List<QuestionCard>>
+        get()=list
     var title: String? = ""
     var content: String? = ""
-        init {
-        for (i in 0 until 5) {
-            answer += QuestionAnswer(
-                id = i,
-                date = 1649668243L,
-                content = "Item $i",
-                name = "Temp",
-                head = "https://i1.hdslb.com/bfs/face/130f111812e082c13d7c8b2232231a122957aa20.jpg@240w_240h_1c_1s.webp"
-            )
+    fun getAllQuestion(onSuccess:() -> Unit = {}, onFailure:() -> Unit = {}) = viewModelScope.launch {
+        val res: List<QuestionCard>
+        try{
+            res = repository.getAllQuestionList()
+            list.postValue(res)
+            onSuccess.invoke()
+        }catch (e: Throwable)
+        {
+            ToastUtil.showToast(e.localizedMessage)
+            onFailure.invoke()
         }
-        for (i in 0 until 10) {
-            list += QuestionCard(
-                id = i,
-                user = "Jack Gram",
-                title = "Hello, World",
-                content = "Use this factory method to create a new instance of\n" +
-                        "* this fragment using the provided parameters.\n" +
-                        "*\n" +
-                        "* @param param1 Parameter 1.\n" +
-                        "* @param param2 Parameter 2.\n" +
-                        "* @return A new instance of fragment CommunityFragment.",
-                head = "https://i1.hdslb.com/bfs/face/130f111812e082c13d7c8b2232231a122957aa20.jpg@240w_240h_1c_1s.webp",
-                date = 1649668243L,
-                isSolved = i % 2 != 0,
-                answer = answer
-            )
-        }
-            list += QuestionCard(
-                id = 11,
-                user = "silent碎月",
-                title = "2016 年美国总统大选对你造成了怎样的改变？",
-                content ="本次2016美国总统大选堪称21世纪乃至有史以来最重要的一次美国总统选举，双方候选人均极具争议性和话题性，其影响深远程度以及关注度之高可谓是空前绝后，本次大选结果也将直接决定人类文明的未来；在本次大选中爆发出来的诸多戏剧性事件和无数爆炸性重磅事实让许多人都开始重新评判自己以前对事物的认识和观点，动摇乃至改变了自己坚持多年的信念和选择；持续一年多的大选拉锯战逐渐走向高潮，它深远地影响和改变了参与者们，不仅仅包括每一个切身攸关的美国人，也包括知乎上的关注者们。那么，本次2016美国总统大选让你学到了什么？对你的观念和生活分别产生了怎么样的改变？",
-                head="https://i1.hdslb.com/bfs/face/3eacf147bfe00ca8626198ac5eed886ee535bbee.jpg@96w_96h_1c_1s.webp",
-                date = 1649943869,
-                isSolved = true,
-                answer = listOf(QuestionAnswer(content = "借用《Chicago》中“silver tongue”Billy Flynn\n" +
-                        "\n" +
-                        "\n" +
-                        "在庭审前安慰杀了人的女士的金句——\n" +
-                        "\n" +
-                        "\n" +
-                        "“It's all show business”", date=1649943869,
-                    head ="https://pica.zhimg.com/v2-81aecab23a477d2de02f292077b7fec8_xs.jpg?source=1940ef5c",
-                    name = "雨墨",
-                    id = 12
-                ))
-            )
+
     }
     fun releaseQuestion(title: String, content: String, onSuccess: () -> Unit = {}) = viewModelScope.launch {
         val question = QuestionRelease(title = title, content = content)

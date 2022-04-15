@@ -21,7 +21,7 @@ class QuestionAnswerViewHolder(val itemView: View): RecyclerView.ViewHolder(item
     {
         head.load(ans.head)
         name.text = ans.name
-        date.text = StringUtil.timeInMillisToString(ans.date)
+        date.text = ans.date
         content.text = ans.content
     }
     companion object{

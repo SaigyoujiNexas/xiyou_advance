@@ -28,12 +28,13 @@ private const val ARG_PARAM2 = "param2"
  * Use the [QuestionInfoFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
 @AndroidEntryPoint
 class QuestionInfoFragment : Fragment() {
 
     private var _binding: FragmentQuestionInfoBinding? = null
 
-    private var question: QuestionCard? = null
+    private lateinit var question: QuestionCard
     private val binding: FragmentQuestionInfoBinding
     get() = _binding!!
 
@@ -42,7 +43,7 @@ class QuestionInfoFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.
         let {
-            question = it.getParcelable("question") as QuestionCard?
+            question = it.getParcelable<QuestionCard>("question") as QuestionCard
         }
     }
 
@@ -68,7 +69,7 @@ class QuestionInfoFragment : Fragment() {
                 ToastUtil.showToast("上传成功，请等待审核")
             }
         }
-        binding.tvQuestionInfoContent.text = question?.content
+        binding.tvQuestionInfoContent.text = question.comment
         val manager = LinearLayoutManager(context)
         manager.isSmoothScrollbarEnabled = false
         manager.orientation = RecyclerView.VERTICAL
@@ -76,7 +77,7 @@ class QuestionInfoFragment : Fragment() {
         val adapter = QuestionAnswerAdapter(QuestionAnswerDiffCallback())
         binding.rvQuestionInfoAnswers.adapter = adapter
         adapter.submitList(
-            question?.answer
+            question.answer.toList()
         )
 
     }

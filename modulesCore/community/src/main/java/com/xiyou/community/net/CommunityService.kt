@@ -9,8 +9,8 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface CommunityService {
-    @GET("")
-    suspend fun getAllQuestionList() : BaseResponse<List<QuestionCard>>
+    @GET("getQuestion")
+    suspend fun getAllQuestionList() : Array<QuestionCard>
 
     @POST("")
     suspend fun releaseQuestion(@Body request: QuestionRelease): BaseResponse<String?>

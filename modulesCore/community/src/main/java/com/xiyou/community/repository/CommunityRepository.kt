@@ -7,8 +7,8 @@ import com.xiyou.community.data.QuestionRelease
 import com.xiyou.community.net.CommunityService
 
 class CommunityRepository(val service: CommunityService){
-    suspend fun getAllQuestionList(): BaseResponse<List<QuestionCard>>{
-        return service.getAllQuestionList()
+    suspend fun getAllQuestionList(): List<QuestionCard>{
+        return service.getAllQuestionList().toList()
     }
     suspend fun releaseQuestion(question: QuestionRelease): BaseResponse<String?>{
         return service.releaseQuestion(question)
