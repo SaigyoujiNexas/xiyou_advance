@@ -1,6 +1,12 @@
-package com.xiyou.community.data.ui
+package com.xiyou.community.data
 
+import android.os.Build
+import android.os.Parcel
+import android.os.Parcelable
+import kotlinx.parcelize.Parceler
+import kotlinx.parcelize.Parcelize
 import java.io.Serializable
+@Parcelize
 data class QuestionCard(
     val head: String,
     val title: String,
@@ -10,12 +16,14 @@ data class QuestionCard(
     val id: Int,
     val isSolved: Boolean,
     val answer: List<QuestionAnswer>
-) : Serializable
+) :Parcelable
 
+
+@Parcelize
 data class QuestionAnswer(
     val head: String,
     val name: String,
     val id: Int,
     val date: Long,
     val content: String
-): Serializable
+): Parcelable

@@ -5,13 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.xiyou.community.data.ui.QuestionCard
+import com.xiyou.advance.modulespublic.common.utils.DialogUtil
+import com.xiyou.advance.modulespublic.common.utils.ToastUtil
+import com.xiyou.community.data.QuestionCard
 import com.xiyou.community.databinding.FragmentQuestionInfoBinding
 import com.xiyou.community.view.adapter.questionAnswer.QuestionAnswerAdapter
 import com.xiyou.community.view.adapter.questionAnswer.QuestionAnswerDiffCallback
+import com.xiyou.community.viewModel.QuestionInfoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,6 +28,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [QuestionInfoFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class QuestionInfoFragment : Fragment() {
 
     private var _binding: FragmentQuestionInfoBinding? = null
@@ -31,11 +37,12 @@ class QuestionInfoFragment : Fragment() {
     private val binding: FragmentQuestionInfoBinding
     get() = _binding!!
 
+    private val viewModel: QuestionInfoViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.
         let {
-            question = it.getSerializable("question") as QuestionCard?
+            question = it.getParcelable("question") as QuestionCard?
         }
     }
 
@@ -52,6 +59,15 @@ class QuestionInfoFragment : Fragment() {
         binding.ivQuestionInfoHead.load(question!!.head)
         binding.tvQuestionInfoName.text = question?.user
         binding.tvQuestionInfoTitle.text = question?.title
+        binding.etQuestionInfoEdit.setText(viewModel.content?:"")
+        binding.btSendRes.setOnClickListener {
+            val dialog = context?.let { it1 -> DialogUtil.showLoading(it1,"上传中") }
+            dialog?.show()
+            viewModel.releaseAnswer(binding.etQuestionInfoEdit.text.toString()){
+                dialog?.hide()
+                ToastUtil.showToast("上传成功，请等待审核")
+            }
+        }
         binding.tvQuestionInfoContent.text = question?.content
         val manager = LinearLayoutManager(context)
         manager.isSmoothScrollbarEnabled = false
@@ -62,6 +78,7 @@ class QuestionInfoFragment : Fragment() {
         adapter.submitList(
             question?.answer
         )
+
     }
 
     companion object {

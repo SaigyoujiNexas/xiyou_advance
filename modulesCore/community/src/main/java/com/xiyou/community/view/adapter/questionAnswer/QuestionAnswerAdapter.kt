@@ -2,8 +2,7 @@ package com.xiyou.community.view.adapter.questionAnswer
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.xiyou.community.data.ui.QuestionAnswer
-import com.xiyou.community.view.adapter.questionCard.QuestionDiffCallback
+import com.xiyou.community.data.QuestionAnswer
 
 class QuestionAnswerAdapter(callback: QuestionAnswerDiffCallback)
     : ListAdapter<QuestionAnswer, QuestionAnswerViewHolder>(callback) {

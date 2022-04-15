@@ -10,13 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xiyou.community.R
-import com.xiyou.community.data.ui.QuestionAnswer
-import com.xiyou.community.data.ui.QuestionCard
 import com.xiyou.community.databinding.FragmentCommunityBinding
 import com.xiyou.community.view.adapter.questionCard.QuestionCardAdapter
 import com.xiyou.community.view.adapter.questionCard.QuestionDiffCallback
 import com.xiyou.community.viewModel.QuestionInfoViewModel
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 
 // TODO: Rename parameter arguments, choose names that match

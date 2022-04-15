@@ -8,9 +8,8 @@ import com.advance.modulespublic.common.R
 
 import com.hjq.toast.ToastUtils
 
-class ToastUtil {
-    companion object{
-        fun init(application: Application)
+object ToastUtil {
+     fun init(application: Application)
         {
             ToastUtils.init(application)
             ToastUtils.setView(R.layout.view_toast
@@ -26,6 +25,4 @@ class ToastUtil {
             if(TextUtils.isEmpty(message)) return
             ToastUtils.show(message)
         }
-
-    }
 }

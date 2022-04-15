@@ -1,13 +1,9 @@
 package com.xiyou.community.view.adapter.questionCard
 
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
-import android.os.Build
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.xiyou.community.data.ui.QuestionCard
-import java.util.*
+import com.xiyou.community.data.QuestionCard
 
 class QuestionCardAdapter(diffCallback: DiffUtil.ItemCallback<QuestionCard>)
     : ListAdapter<QuestionCard, QuestionCardViewHolder>(diffCallback) {

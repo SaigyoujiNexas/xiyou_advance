@@ -3,9 +3,8 @@ package com.xiyou.advance.modulespublic.common.utils;
 import android.content.Context
 import com.xiyou.advance.modulespublic.common.widget.LoadingDialog
 
-class DialogUtil {
-    companion object{
-        @JvmStatic
+object DialogUtil {
+     @JvmStatic
         fun showLoadingMsg(context: Context, msg: String, iconRes: Int, duration: Int): LoadingDialog {
             val dialog = LoadingDialog(context)
             dialog.setType(LoadingDialog.TYPE.TYPE_MSG)
@@ -21,7 +20,4 @@ class DialogUtil {
                 .setMessage(msg)
             return dialog
         }
-
-
-    }
 }

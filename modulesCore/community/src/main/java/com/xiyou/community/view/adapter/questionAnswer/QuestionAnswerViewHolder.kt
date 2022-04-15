@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.xiyou.advance.modulespublic.common.utils.StringUtil
 import com.xiyou.community.R
-import com.xiyou.community.data.ui.QuestionAnswer
+import com.xiyou.community.data.QuestionAnswer
 
 class QuestionAnswerViewHolder(val itemView: View): RecyclerView.ViewHolder(itemView) {
     private val head: ImageView = itemView.findViewById(R.id.iv_question_answer_head);

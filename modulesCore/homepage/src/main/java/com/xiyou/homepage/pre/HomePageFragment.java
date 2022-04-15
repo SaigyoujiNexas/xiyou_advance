@@ -11,16 +11,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.hilt.lifecycle.ViewModelFactoryModules;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xiyou.advance.modulespublic.common.net.CourseInfo;
 import com.xiyou.advance.modulespublic.common.net.GetRequest;
 import com.xiyou.homepage.R;
+import com.xiyou.homepage.viewModel.HomePageViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function1;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +39,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
  * Use the {@link HomePageFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 public class HomePageFragment extends Fragment {
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,6 +55,7 @@ public class HomePageFragment extends Fragment {
     RecyclerView recyclerView;
     final String TAG = "HomePageFragmentTAG";
     private List<CourseInfo> courseList;
+    private HomePageViewModel viewModel;
     public HomePageFragment() {
         // Required empty public constructor
     }
@@ -71,10 +81,8 @@ public class HomePageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        //create the view model.
+        viewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
         initData();
     }
     private void initData(){
@@ -99,8 +107,47 @@ public class HomePageFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        initRetrofit();
+//        initRetrofit();
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initList();
+
+    }
+    public void initList(){
+        viewModel.getCourses(
+                new Function0() {
+                    @Override
+                    public Object invoke() {
+                        //onSuccess invoke, must return 0
+                        return null;
+                    }
+                },
+                new Function1() {
+                    @Override
+                    public Object invoke(Object o) {
+                        var t = o.toString();
+                        Log.d(TAG, "error+" + t);
+                        Toast.makeText(recyclerView.getContext(), "访问失败，服务器出了问题", Toast.LENGTH_SHORT).show();
+                        return null;
+                    }
+                }
+        );
+        //对 course 进行观察
+        viewModel.getCourses().observe(getViewLifecycleOwner(), new Observer<List<CourseInfo>>() {
+            @Override
+            public void onChanged(List<CourseInfo> courseInfos) {
+                //如果不为0
+                if(courseInfos.size() >0) {
+                    Adapter_HomepageRecycler adapter_homepageRecycler = new Adapter_HomepageRecycler(newsList, courseInfos);
+                    recyclerView.setAdapter(adapter_homepageRecycler);
+                    adapter_homepageRecycler.notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     public void initRetrofit(){
@@ -115,7 +162,6 @@ public class HomePageFragment extends Fragment {
                 Adapter_HomepageRecycler adapter_homepageRecycler = new Adapter_HomepageRecycler(newsList, courseList);
                 recyclerView.setAdapter(adapter_homepageRecycler);
                 adapter_homepageRecycler.notifyDataSetChanged();
-
             }
 
             @Override
