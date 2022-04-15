@@ -6,6 +6,7 @@ plugins {
         id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
+    id("kotlin-kapt")
 }
 
 android {
@@ -54,7 +55,7 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     libraryC.forEach { (_, s2) -> implementation(s2) }
     libs.forEach { implementation(it) }
-    apts.forEach { annotationProcessor(it) }
+    apts.forEach { kapt(it) }
     tests.forEach { androidTestImplementation(it) }
     libKtx.forEach { implementation(it) }
     testImplementation("junit:junit:4.13.2")

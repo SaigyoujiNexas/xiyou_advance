@@ -9,17 +9,25 @@ import android.view.WindowManager
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.xiyou.advance.modulespublic.common.utils.DialogUtil
+import com.xiyou.advance.modulespublic.common.utils.ToastUtil
 import com.xiyou.community.databinding.FragmentQuestionReleaseBinding
+import com.xiyou.community.viewModel.QuestionInfoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
 /**
  * An example full-screen fragment that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
+@AndroidEntryPoint
 class QuestionReleaseFragment : Fragment() {
 
     private var _binding: FragmentQuestionReleaseBinding? = null
 
+    val viewModel: QuestionInfoViewModel by viewModels()
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -35,7 +43,25 @@ class QuestionReleaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.etQuestionReleaseTitle.setText(viewModel.title)
+        binding.etQuestionReleaseContent.setText(viewModel.content)
+        binding.fabQuestionRelease.setOnClickListener {
 
+            val dialog = context?.let { it1 -> DialogUtil.showLoading(it1, "上传中") }
+            dialog?.show()
+            viewModel.releaseQuestion(binding.etQuestionReleaseTitle.text.toString(),
+            binding.etQuestionReleaseContent.text.toString()){
+                dialog?.hide()
+                ToastUtil.showToast("发布成功")
+                findNavController().popBackStack()
+            }
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        viewModel.title = ""
+        viewModel.content = ""
     }
 
 

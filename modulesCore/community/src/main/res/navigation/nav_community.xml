@@ -30,7 +30,7 @@
             app:popUpToInclusive="false">"
             <argument
                 android:name="question"
-                app:argType="com.xiyou.community.data.ui.QuestionCard" />
+                app:argType="com.xiyou.community.data.QuestionCard" />
         </action>
     </fragment>
     <fragment
@@ -40,6 +40,6 @@
         tools:layout="@layout/fragment_question_info">
         <argument
             android:name="question"
-            app:argType="com.xiyou.community.data.ui.QuestionCard"/>
+            app:argType="com.xiyou.community.data.QuestionCard"/>
     </fragment>
 </navigation>

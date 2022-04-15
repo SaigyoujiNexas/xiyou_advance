@@ -1,7 +1,7 @@
 package com.xiyou.community.view.adapter.questionAnswer
 
 import androidx.recyclerview.widget.DiffUtil
-import com.xiyou.community.data.ui.QuestionAnswer
+import com.xiyou.community.data.QuestionAnswer
 
 class QuestionAnswerDiffCallback: DiffUtil.ItemCallback<QuestionAnswer>() {
     override fun areItemsTheSame(oldItem: QuestionAnswer, newItem: QuestionAnswer): Boolean {

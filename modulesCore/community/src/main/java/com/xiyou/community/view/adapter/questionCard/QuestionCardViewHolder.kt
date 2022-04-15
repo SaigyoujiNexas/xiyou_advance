@@ -1,9 +1,5 @@
 package com.xiyou.community.view.adapter.questionCard
 
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
-import android.os.Build
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,13 +10,13 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.xiyou.advance.modulespublic.common.utils.StringUtil
-import com.xiyou.advance.modulespublic.common.utils.ToastUtil
 import com.xiyou.community.R
-import com.xiyou.community.data.ui.QuestionCard
-import java.util.*
+import com.xiyou.community.data.QuestionCard
+import java.math.RoundingMode
 
 class QuestionCardViewHolder(val itemView: View):RecyclerView.ViewHolder(itemView) {
     private val head: ImageView = itemView.findViewById(R.id.iv_question_card_head)
+    private val name: TextView = itemView.findViewById(R.id.tv_question_card_user_name)
     private val title: TextView = itemView.findViewById(R.id.tv_question_card_title)
     private val content: TextView = itemView.findViewById(R.id.tv_question_card_content)
     private val date : TextView = itemView.findViewById(R.id.tv_question_card_date)
@@ -28,20 +24,23 @@ class QuestionCardViewHolder(val itemView: View):RecyclerView.ViewHolder(itemVie
     fun bind (question: QuestionCard)
     {
         val bundle = bundleOf("question" to question)
+
         head.load(question.head){
             crossfade(true)
             placeholder(R.mipmap.img_user)
+            
         }
-        if(question.isSolved)
+        if(question.solved)
         {
             isSolved.visibility = View.VISIBLE
         }
         else{
             isSolved.visibility = View.INVISIBLE
         }
+        name.text = question.user
         title.text = question.title
-        content.text = question.content
-        date.text = StringUtil.timeInMillisToString(question.date)
+        content.text = question.comment
+        date.text = question.date
         itemView.setOnClickListener(Navigation
             .createNavigateOnClickListener(R.id.action_community_to_questionInfo, bundle))
     }

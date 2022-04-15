@@ -4,6 +4,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import com.xiyou.advance.modulespublic.common.net.ApiService
+import com.xiyou.advance.modulespublic.common.net.GetService
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -15,5 +16,10 @@ class ApplicationModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+    @Provides
+    @Singleton
+    fun provideGetService(retrofit: Retrofit): GetService{
+        return retrofit.create(GetService::class.java)
     }
 }

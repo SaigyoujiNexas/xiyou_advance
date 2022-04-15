@@ -10,13 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xiyou.community.R
-import com.xiyou.community.data.ui.QuestionAnswer
-import com.xiyou.community.data.ui.QuestionCard
 import com.xiyou.community.databinding.FragmentCommunityBinding
 import com.xiyou.community.view.adapter.questionCard.QuestionCardAdapter
 import com.xiyou.community.view.adapter.questionCard.QuestionDiffCallback
 import com.xiyou.community.viewModel.QuestionInfoViewModel
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,6 +34,7 @@ class CommunityFragment : Fragment() {
     private lateinit var binding: FragmentCommunityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.getAllQuestion()
 
     }
     override fun onCreateView(
@@ -48,19 +46,21 @@ class CommunityFragment : Fragment() {
 
         return binding.root
     }
-
     override fun onResume() {
         super.onResume()
-        val rv = binding.rvCommunityQuestionCards
-        rv.layoutManager = LinearLayoutManager(context)
-        val adapter = QuestionCardAdapter(QuestionDiffCallback())
-        rv.adapter = adapter
-        adapter.submitList(viewModel.list)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.fabCommunityEdit.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_community_to_question_release))
+        val rv = binding.rvCommunityQuestionCards
+        rv.layoutManager = LinearLayoutManager(context)
+        val adapter = QuestionCardAdapter(QuestionDiffCallback())
+        rv.adapter = adapter
+        viewModel.questions.observe(viewLifecycleOwner){
+            adapter.submitList(it)
+        }
 
     }
 
