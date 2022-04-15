@@ -6,8 +6,8 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface GetRequest {
-    @GET("getContents")
+    @GET("/getContents")
     Call<List<ChapterInfo>> getContents();
-    @GET("getRecommands")
+    @GET("/getRecommands")
     Call<List<CourseInfo>> getCourses();
 }

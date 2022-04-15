@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.xiyou.advance.modulespublic.common.net.CourseInfo;
@@ -44,7 +45,7 @@ public class UndertakeFragment extends Fragment {
     final String TAG = "UndertakeFragmentTAG";
     CardView edit_card_fragment;
     private List<CourseInfo> courseList;
-
+    String imgStr;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,6 +55,13 @@ public class UndertakeFragment extends Fragment {
         edit_card_fragment = view.findViewById(R.id.edit_card_fragment);
         edit_fragment_undertake = view.findViewById(R.id.edit_fragment_undertake);
         img_undertake = view.findViewById(R.id.img_undertake);
+        Bundle bundle=getArguments();
+        imgStr=bundle.getString("img");
+        Glide.with(getContext())
+                .load(imgStr)
+                .placeholder(com.advance.modulespublic.common.R.drawable.img0)//图片加载出来前，显示的图片
+                .error(com.advance.modulespublic.common.R.drawable.img0)//图片加载失败后，显示的图片
+                .into(img_undertake);
         viewpager2_undertake = view.findViewById(R.id.viewpager2_undertake);
         tab_undertake = view.findViewById(R.id.tab_undertake);
         Adapter_Undertake adapter_undertake  = new Adapter_Undertake(courseList);

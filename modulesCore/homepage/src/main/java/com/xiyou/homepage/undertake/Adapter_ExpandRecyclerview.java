@@ -36,7 +36,8 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
     private int chapterCount = 1;
     public Adapter_ExpandRecyclerview(CourseInfo _courseInfo) {
         this.courseInfo = _courseInfo;
-        for(BaseInfo info : courseInfo.chapterInfos){
+        Log.d(TAG,courseInfo.list.size()+"");
+        for(BaseInfo info : courseInfo.list){
             dataInfos.add(info);
         }
     }
@@ -65,7 +66,7 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
             ChapterInfo chapterInfo = (ChapterInfo) dataInfos.get(position);
             itemHolder.tvNumber.setText("第"+chapterCount+++"章");
             itemHolder.tvName.setText(chapterInfo.getTitle());
-            if(chapterInfo.sectionInfos.size() > 0){
+            if(chapterInfo.list.size() > 0){
                 itemHolder.ivArrow.setVisibility(View.VISIBLE);
                 if(curExpandChapterIndex == position){
                     itemHolder.ivArrow.setBackgroundResource(com.advance.modulespublic.common.R.drawable.arrow_up);
@@ -200,12 +201,13 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
             if(getItemViewType(position) == VIEW_TYPE_CHAPTER){
                 ChapterInfo chapterInfo = (ChapterInfo) dataInfos.get(position);
                 chapterIndex = chapterInfo.chapterIndex;
+                Log.d(TAG,""+chapterIndex);
                 sectionIndex = -1;
                 if(v.getId() == R.id.tv_item_chapter_number){
                     viewName = ViewName.CHAPTER_ITEM_PRACTISE;
                 }else{
                     viewName = ViewName.CHAPTER_ITEM;
-                    if(chapterInfo.sectionInfos.size() > 0){
+                    if(chapterInfo.list.size() > 0){
                         if(chapterIndex == curExpandChapterIndex){
                             narrow(curExpandChapterIndex);
                         }else{
@@ -229,11 +231,11 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
      * @param chapterIndex
      */
     private void expand(int chapterIndex){
-        dataInfos.addAll(chapterIndex+1, courseInfo.chapterInfos.get(chapterIndex).sectionInfos);
+        dataInfos.addAll(chapterIndex+1, courseInfo.list.get(chapterIndex).list);
         curExpandChapterIndex = chapterIndex;
-        Log.v(TAG,"---expand---"+(chapterIndex+1)+", "+courseInfo.chapterInfos.get(chapterIndex).sectionInfos.size());
+        Log.v(TAG,"---expand---"+(chapterIndex+1)+", "+courseInfo.list.get(chapterIndex).list.size());
         //增
-        notifyItemRangeInserted(chapterIndex+1, courseInfo.chapterInfos.get(chapterIndex).sectionInfos.size());
+        notifyItemRangeInserted(chapterIndex+1, courseInfo.list.get(chapterIndex).list.size());
 
         /*notifyItemRangeChanged(chapterIndex + 1 + courseInfo.chapterInfos.get(chapterIndex).sectionInfos.size(),
                 getItemCount() - chapterIndex - 1, "change_position");*/
@@ -251,7 +253,7 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
             for(int i=removeStart; i<dataInfos.size() && getItemViewType(i) == VIEW_TYPE_SECTION; i++){
                 removeCount++;
             }
-            dataInfos.removeAll(courseInfo.chapterInfos.get(chapterIndex).sectionInfos);
+            dataInfos.removeAll(courseInfo.list.get(chapterIndex).list);
             curExpandChapterIndex = -1;
             Log.v(TAG,"---narrow---"+removeStart+", "+removeCount);
             notifyItemRangeRemoved(removeStart, removeCount);

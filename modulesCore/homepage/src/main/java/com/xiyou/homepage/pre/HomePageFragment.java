@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -97,10 +98,11 @@ public class HomePageFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new Adapter_HomepageRecycler(newsList));
+
         initRetrofit();
         return view;
     }
+
     public void initRetrofit(){
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://8.142.65.201:8080").addConverterFactory(MoshiConverterFactory.create()).build();
         GetRequest getRequest = retrofit.create(GetRequest.class);
@@ -110,11 +112,16 @@ public class HomePageFragment extends Fragment {
             public void onResponse(Call<List<CourseInfo>> call, Response<List<CourseInfo>> response) {
                 Log.d(TAG,"onresponsebody:"+response.body()+",errorbody:"+response.errorBody()+",message:"+response.message());
                 courseList = response.body();
+                Adapter_HomepageRecycler adapter_homepageRecycler = new Adapter_HomepageRecycler(newsList, courseList);
+                recyclerView.setAdapter(adapter_homepageRecycler);
+                adapter_homepageRecycler.notifyDataSetChanged();
+
             }
 
             @Override
             public void onFailure(Call<List<CourseInfo>> call, Throwable t) {
                 Log.d(TAG,"error+"+t.toString());
+                Toast.makeText(recyclerView.getContext(), "访问失败，服务器出了问题", Toast.LENGTH_SHORT).show();
             }
         });
     }

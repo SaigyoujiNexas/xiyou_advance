@@ -27,7 +27,7 @@ const val libRetrofit2Moshi = "com.squareup.retrofit2:converter-moshi:2.9.0"
 const val libExpandRecycler = "com.thoughtbot:expandablerecyclerview:1.0"
 const val libCoil = "io.coil-kt:coil:1.4.0"
 const val libCoilCompose = "io.coil-kt:coil-compose:2.0.0-rc01"
-
+const val libGlide = "com.github.bumptech.glide:glide:3.7.0"
 const val libRoom =  "androidx.room:room-runtime:$room_version"
 const val libRoomCompiler = "androidx.room:room-compiler:$room_version"
 
@@ -89,7 +89,8 @@ val libs = listOf(
     libRxAndroid,
     libCoil,
     libRoom,
-    libExpandRecycler
+    libExpandRecycler,
+    libGlide
 )
 val tests = listOf(
     "androidx.navigation:navigation-testing:$nav_version"

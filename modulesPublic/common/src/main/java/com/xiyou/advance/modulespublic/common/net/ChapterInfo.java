@@ -5,8 +5,7 @@ import java.util.List;
 
 public class ChapterInfo extends BaseInfo{
     String title;
-    String url;
-    public List<SectionInfo> sectionInfos = new ArrayList<>();
+    public List<SectionInfo> list = new ArrayList<>();
 
     public String name;
     public int chapterIndex;
@@ -19,19 +18,28 @@ public class ChapterInfo extends BaseInfo{
         this.title = title;
     }
 
-    public String getUrl() {
-        return url;
+
+    public List<SectionInfo> getList() {
+        return list;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setList(List<SectionInfo> list) {
+        this.list = list;
     }
 
-    public List<SectionInfo> getSectionInfos() {
-        return sectionInfos;
+    public String getName() {
+        return name;
     }
 
-    public void setSectionInfos(List<SectionInfo> sectionInfos) {
-        this.sectionInfos = sectionInfos;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getChapterIndex() {
+        return chapterIndex;
+    }
+
+    public void setChapterIndex(int chapterIndex) {
+        this.chapterIndex = chapterIndex;
     }
 }

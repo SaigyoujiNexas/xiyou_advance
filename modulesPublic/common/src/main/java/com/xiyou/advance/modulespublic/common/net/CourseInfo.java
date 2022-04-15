@@ -7,5 +7,5 @@ public class CourseInfo extends BaseInfo{
     public int id;
     public String title;
     public String cover;
-    public List<ChapterInfo> chapterInfos = new ArrayList<>();
+    public List<ChapterInfo> list = new ArrayList<>();
 }

@@ -50,6 +50,7 @@ android {
 
 dependencies {
     implementation(project(":modulesPublic:common"))
+    implementation("com.github.bumptech.glide:glide:4.12.0")
     libraryC.forEach { (_, s2) -> implementation(s2) }
     libs.forEach { implementation(it) }
     apts.forEach { annotationProcessor(it) }
