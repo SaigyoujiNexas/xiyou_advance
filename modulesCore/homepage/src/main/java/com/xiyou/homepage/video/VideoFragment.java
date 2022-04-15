@@ -99,13 +99,12 @@ public class VideoFragment extends Fragment {
             var uri = Uri.parse(url);
             if (uri.getScheme().equals("http") || uri.getScheme().equals("https")) {
                 view.loadUrl(url);
-                return true;
             } else {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
 
-                return true;
             }
+            return true;
 
         }
     }
