@@ -1,5 +1,7 @@
 package com.xiyou.homepage.video;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -79,13 +81,7 @@ public class VideoFragment extends Fragment {
         webSettings.setDomStorageEnabled(true);//这句话必须保留。。否则无法播放优酷视频网页。。其他的可以
         webView.setWebChromeClient(new WebChromeClient());//重写一下。有的时候可能会出现问题
         webView.loadUrl(videoData);
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
+        webView.setWebViewClient(new WebClient());
         return view;
     }
     @Override
@@ -95,4 +91,22 @@ public class VideoFragment extends Fragment {
         }
         super.onDestroy();
     }
+
+    class WebClient extends WebViewClient {
+
+        @Override
+        public  boolean shouldOverrideUrlLoading(WebView view, String url) {
+            var uri = Uri.parse(url);
+            if (uri.getScheme().equals("http") || uri.getScheme().equals("https")) {
+                view.loadUrl(url);
+            } else {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+
+            }
+            return true;
+
+        }
+    }
+
 }

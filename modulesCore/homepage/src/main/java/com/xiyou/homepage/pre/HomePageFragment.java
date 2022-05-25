@@ -151,6 +151,7 @@ public class HomePageFragment extends Fragment {
         });
     }
 
+    @Deprecated
     public void initRetrofit(){
         ProgressUtil.showProgressDialog("正在加载","正在加载... ",getContext());
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://8.142.65.201:8080").addConverterFactory(MoshiConverterFactory.create()).build();
