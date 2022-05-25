@@ -8,5 +8,4 @@
 <!--            android:name=".undertake.UndertakeActivity"-->
 <!--            android:exported="true" />-->
     </application>
-
 </manifest>

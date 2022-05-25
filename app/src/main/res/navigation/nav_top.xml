@@ -7,4 +7,4 @@
     <include app:graph="@navigation/nav_homepage"/>
     <include app:graph="@navigation/nav_community"/>
     <include app:graph="@navigation/nav_account"/>
-   </navigation>
+</navigation>

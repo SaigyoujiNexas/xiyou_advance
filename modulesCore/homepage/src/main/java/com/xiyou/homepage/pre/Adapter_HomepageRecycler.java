@@ -39,7 +39,6 @@ public class Adapter_HomepageRecycler extends RecyclerView.Adapter<Adapter_Homep
        view.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-
                NavController controller=Navigation.findNavController(parent);
                Bundle bundle=new Bundle();
                bundle.putString("img",courseInfo.cover);
@@ -48,7 +47,6 @@ public class Adapter_HomepageRecycler extends RecyclerView.Adapter<Adapter_Homep
                controller.navigate(R.id.action_homepage_to_undertake,bundle);
            }
        });
-
         return viewHolder;
     }
 

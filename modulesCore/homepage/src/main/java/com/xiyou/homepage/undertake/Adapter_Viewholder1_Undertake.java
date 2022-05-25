@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xiyou.advance.modulespublic.common.net.Comment_Course;
 import com.xiyou.homepage.R;
 
 import java.util.List;
@@ -30,10 +31,10 @@ public class Adapter_Viewholder1_Undertake extends RecyclerView.Adapter<Adapter_
     @Override
     public void onBindViewHolder(@NonNull CommentViewholder holder, int position) {
         Comment_Course comment_course = list.get(position);
-        holder.usernameText.setText(comment_course.getComment());
-        holder.commentText.setText(comment_course.getUserName());
-        holder.sendtiemText.setText(comment_course.getSendTime());
-        holder.userImg.setImageResource(comment_course.getUserImg());
+//        holder.usernameText.setText(comment_course.getComment());
+//        holder.commentText.setText(comment_course.getUserName());
+//        holder.sendtiemText.setText(comment_course.getSendTime());
+//        holder.userImg.setImageResource(comment_course.getUserImg());
     }
 
     @Override

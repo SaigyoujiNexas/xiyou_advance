@@ -40,44 +40,11 @@ public class Viewholder0_Expand_Undertake extends RecyclerView.ViewHolder {
         mCourseInfo = courseList.get(0);
         for (int i = 0; i < courseList.size(); i++) {
             CourseInfo courseInfo = courseList.get(i);
-            for (int j = 0; j < courseInfo.list.size(); j++) {
-                ChapterInfo chapterInfo = courseInfo.list.get(j);
+            for (int j = 0; j < list.size(); j++) {
+                ChapterInfo chapterInfo = list.get(j);
                 chapterInfo.setChapterIndex(j);
             }
         }
-
-        //mCourseInfo.cover = contentsList.get(0);
-//        for(int i=0; i< contentsList.size(); i++){
-//            ChapterInfo chapterInfo = new ChapterInfo();
-//            chapterInfo.name = "假装是课时名称"+(i+1);
-//            chapterInfo.chapterIndex = i;
-//            if(i==0){
-//                for(int j=0; j<2; j++){
-//                    SectionInfo sectionInfo = new SectionInfo();
-//                    sectionInfo.name = "第"+(j+1)+"节";
-//                    sectionInfo.chapterIndex = i;
-//                    sectionInfo.sectionIndex = j;
-//                    chapterInfo.sectionInfos.add(sectionInfo);
-//                }
-//            }else if(i==1){
-//                for(int j=0; j<3; j++){
-//                    SectionInfo sectionInfo = new SectionInfo();
-//                    sectionInfo.name = "第"+(j+1)+"节";
-//                    sectionInfo.chapterIndex = i;
-//                    sectionInfo.sectionIndex = j;
-//                    chapterInfo.sectionInfos.add(sectionInfo);
-//                }
-//            }else{
-//                for (int j = 0; j < 4; j++) {
-//                    SectionInfo sectionInfo = new SectionInfo();
-//                    sectionInfo.name = "第" + (j + 1) + "节";
-//                    sectionInfo.chapterIndex = i;
-//                    sectionInfo.sectionIndex = j;
-//                    chapterInfo.sectionInfos.add(sectionInfo);
-//                }
-//            }
-//            mCourseInfo.chapterInfos.add(chapterInfo);//章节
-//        }
     }
 
     public void initViews(){
@@ -94,9 +61,9 @@ public class Viewholder0_Expand_Undertake extends RecyclerView.ViewHolder {
                 //Timber.v("---onClick---"+viewName+", "+chapterIndex+", "+sectionIndex);
                 switch (viewName){
                     case CHAPTER_ITEM:
-                        if(mCourseInfo.list.get(chapterIndex).list.size() > 0){
+                        if(list.get(chapterIndex).list.size() > 0){
                             Log.v(TAG,"---onClick---just expand or narrow: "+chapterIndex);
-                            if(chapterIndex + 1 == mCourseInfo.list.size()){
+                            if(chapterIndex + 1 == list.size()){
                                 //如果是最后一个，则滚动到展开的最后一个item
                                 mRecyclerView.smoothScrollToPosition(chapterAdapter.getItemCount());
                                 Log.v(TAG,"---onClick---scroll to bottom");

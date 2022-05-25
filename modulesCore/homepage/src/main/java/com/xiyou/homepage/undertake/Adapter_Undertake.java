@@ -40,7 +40,7 @@ public class Adapter_Undertake extends RecyclerView.Adapter{
         if(holder instanceof Viewholder0_Expand_Undertake){
             ((Viewholder0_Expand_Undertake) holder).initRetrofit();
         }else if(holder instanceof Viewholder1_Expand_Undertake){
-            ((Viewholder1_Expand_Undertake) holder).initView();
+            ((Viewholder1_Expand_Undertake) holder).initRetrofit();
         }
     }
 

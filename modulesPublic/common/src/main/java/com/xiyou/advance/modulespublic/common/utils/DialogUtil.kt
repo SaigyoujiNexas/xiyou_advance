@@ -20,4 +20,5 @@ object DialogUtil {
                 .setMessage(msg)
             return dialog
         }
+
 }

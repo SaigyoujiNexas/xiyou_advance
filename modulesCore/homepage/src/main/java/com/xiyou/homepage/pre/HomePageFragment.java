@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.hilt.lifecycle.ViewModelFactoryModules;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.xiyou.advance.modulespublic.common.net.CourseInfo;
 import com.xiyou.advance.modulespublic.common.net.GetRequest;
+import com.xiyou.advance.modulespublic.common.utils.ProgressUtil;
 import com.xiyou.homepage.R;
 import com.xiyou.homepage.viewModel.HomePageViewModel;
 
@@ -107,14 +107,14 @@ public class HomePageFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-//        initRetrofit();
+        initRetrofit();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initList();
+        //initList();
 
     }
     public void initList(){
@@ -122,6 +122,7 @@ public class HomePageFragment extends Fragment {
                 new Function0() {
                     @Override
                     public Object invoke() {
+
                         //onSuccess invoke, must return 0
                         return null;
                     }
@@ -151,6 +152,7 @@ public class HomePageFragment extends Fragment {
     }
 
     public void initRetrofit(){
+        ProgressUtil.showProgressDialog("正在加载","正在加载... ",getContext());
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://8.142.65.201:8080").addConverterFactory(MoshiConverterFactory.create()).build();
         GetRequest getRequest = retrofit.create(GetRequest.class);
         Call<List<CourseInfo>> call = getRequest.getCourses();
@@ -162,12 +164,14 @@ public class HomePageFragment extends Fragment {
                 Adapter_HomepageRecycler adapter_homepageRecycler = new Adapter_HomepageRecycler(newsList, courseList);
                 recyclerView.setAdapter(adapter_homepageRecycler);
                 adapter_homepageRecycler.notifyDataSetChanged();
+                ProgressUtil.hideProgressDialog();
             }
 
             @Override
             public void onFailure(Call<List<CourseInfo>> call, Throwable t) {
                 Log.d(TAG,"error+"+t.toString());
                 Toast.makeText(recyclerView.getContext(), "访问失败，服务器出了问题", Toast.LENGTH_SHORT).show();
+                ProgressUtil.hideProgressDialog();
             }
         });
     }
