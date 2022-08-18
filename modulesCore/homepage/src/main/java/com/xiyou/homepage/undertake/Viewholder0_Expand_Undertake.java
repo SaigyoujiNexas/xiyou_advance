@@ -9,12 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.xiyou.advance.modulespublic.common.net.ChapterInfo;
 import com.xiyou.advance.modulespublic.common.net.CourseInfo;
 import com.xiyou.advance.modulespublic.common.net.GetRequest;
 import com.xiyou.homepage.R;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,10 +40,10 @@ public class Viewholder0_Expand_Undertake extends RecyclerView.ViewHolder {
         mCourseInfo = courseList.get(0);
         for (int i = 0; i < courseList.size(); i++) {
             CourseInfo courseInfo = courseList.get(i);
-            for (int j = 0; j < list.size(); j++) {
-                ChapterInfo chapterInfo = list.get(j);
-                chapterInfo.setChapterIndex(j);
-            }
+//            for (int j = 0; j < list.size(); j++) {
+//                ChapterInfo chapterInfo = list.get(j);
+//                chapterInfo.setChapterIndex(j);
+//            }
         }
     }
 
@@ -61,16 +61,16 @@ public class Viewholder0_Expand_Undertake extends RecyclerView.ViewHolder {
                 //Timber.v("---onClick---"+viewName+", "+chapterIndex+", "+sectionIndex);
                 switch (viewName){
                     case CHAPTER_ITEM:
-                        if(list.get(chapterIndex).list.size() > 0){
-                            Log.v(TAG,"---onClick---just expand or narrow: "+chapterIndex);
-                            if(chapterIndex + 1 == list.size()){
-                                //如果是最后一个，则滚动到展开的最后一个item
-                                mRecyclerView.smoothScrollToPosition(chapterAdapter.getItemCount());
-                                Log.v(TAG,"---onClick---scroll to bottom");
-                            }
-                        }else{
-                            onClickChapter(chapterIndex);
-                        }
+//                        if(list.get(chapterIndex).list.size() > 0){
+//                            Log.v(TAG,"---onClick---just expand or narrow: "+chapterIndex);
+//                            if(chapterIndex + 1 == list.size()){
+//                                //如果是最后一个，则滚动到展开的最后一个item
+//                                mRecyclerView.smoothScrollToPosition(chapterAdapter.getItemCount());
+//                                Log.v(TAG,"---onClick---scroll to bottom");
+//                            }
+//                        }else{
+//                            onClickChapter(chapterIndex);
+//                        }
                         break;
                     case CHAPTER_ITEM_PRACTISE:
                         onClickPractise(chapterIndex);
@@ -128,5 +128,18 @@ public class Viewholder0_Expand_Undertake extends RecyclerView.ViewHolder {
 
     private void onClickPractise(int chapterIndex){
         Log.v(TAG,"---onClick---practise: "+chapterIndex);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Viewholder0_Expand_Undertake that = (Viewholder0_Expand_Undertake) o;
+        return Objects.equals(mRecyclerView, that.mRecyclerView) && Objects.equals(mCourseInfo, that.mCourseInfo) && Objects.equals(context, that.context) && Objects.equals(courseList, that.courseList) && Objects.equals(title_viewholder0_undertake, that.title_viewholder0_undertake) && Objects.equals(TAG, that.TAG);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mRecyclerView, mCourseInfo, context, courseList, title_viewholder0_undertake, TAG);
     }
 }

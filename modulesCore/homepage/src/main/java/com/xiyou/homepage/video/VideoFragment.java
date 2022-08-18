@@ -71,7 +71,7 @@ public class VideoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_video, container, false);
         webView = view.findViewById(R.id.web_video_fragment);
         Bundle bundle=getArguments();
-        videoData=bundle.getString("videoData");
+        videoData = bundle.getString("videoData");
         WebSettings webSettings = webView.getSettings();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);

@@ -39,10 +39,10 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
     private int chapterCount = 1;
     public Adapter_ExpandRecyclerview(CourseInfo _courseInfo) {
         this.courseInfo = _courseInfo;
-        Log.d(TAG,courseInfo.list.size()+"");
-        for(BaseInfo info : courseInfo.list){
-            dataInfos.add(info);
-        }
+//        Log.d(TAG,courseInfo.list.size()+"");
+//        for(BaseInfo info : courseInfo.list){
+//            dataInfos.add(info);
+//        }
     }
 
     @Override
@@ -239,11 +239,11 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
      * @param chapterIndex
      */
     private void expand(int chapterIndex){
-        dataInfos.addAll(chapterIndex+1, courseInfo.list.get(chapterIndex).list);
-        curExpandChapterIndex = chapterIndex;
-        Log.v(TAG,"---expand---"+(chapterIndex+1)+", "+courseInfo.list.get(chapterIndex).list.size());
-        //增
-        notifyItemRangeInserted(chapterIndex+1, courseInfo.list.get(chapterIndex).list.size());
+//        dataInfos.addAll(chapterIndex+1, courseInfo.list.get(chapterIndex).list);
+//        curExpandChapterIndex = chapterIndex;
+//        Log.v(TAG,"---expand---"+(chapterIndex+1)+", "+courseInfo.list.get(chapterIndex).list.size());
+//        //增
+//        notifyItemRangeInserted(chapterIndex+1, courseInfo.list.get(chapterIndex).list.size());
 
         /*notifyItemRangeChanged(chapterIndex + 1 + courseInfo.chapterInfos.get(chapterIndex).sectionInfos.size(),
                 getItemCount() - chapterIndex - 1, "change_position");*/
@@ -261,7 +261,7 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
             for(int i=removeStart; i<dataInfos.size() && getItemViewType(i) == VIEW_TYPE_SECTION; i++){
                 removeCount++;
             }
-            dataInfos.removeAll(courseInfo.list.get(chapterIndex).list);
+//            dataInfos.removeAll(courseInfo.list.get(chapterIndex).list);
             curExpandChapterIndex = -1;
             Log.v(TAG,"---narrow---"+removeStart+", "+removeCount);
             notifyItemRangeRemoved(removeStart, removeCount);

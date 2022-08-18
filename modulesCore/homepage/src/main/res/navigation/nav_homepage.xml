@@ -30,5 +30,5 @@
         android:id="@+id/web_video_fragment"
         android:label="学习"
         tools:layout="@layout/fragment_video"
-        android:name="com.xiyou.homepage.video.VideoFragment" />
+        android:name="com.xiyou.homepage.video.VideoFragmentTwo" />
 </navigation>
