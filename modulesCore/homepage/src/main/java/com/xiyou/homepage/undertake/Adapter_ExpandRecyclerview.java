@@ -141,6 +141,7 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
         return super.getItemViewType(position);
     }
 //
+
     public class ChapterViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout llBg;
         public ImageView ivArrow;
@@ -175,7 +176,6 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
     }
 //
 //    以下为item点击处理///
-
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
