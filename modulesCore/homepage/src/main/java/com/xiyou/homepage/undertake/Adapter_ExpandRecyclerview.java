@@ -68,7 +68,7 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
             itemHolder.itemView.setTag(position);
             ChapterInfo chapterInfo = (ChapterInfo) dataInfos.get(position);
             itemHolder.tvNumber.setText("第"+chapterCount+++"章");
-            itemHolder.tvName.setText(chapterInfo.getTitle());
+            //itemHolder.tvName.setText(chapterInfo.getTitle());
             if(chapterInfo.list.size() > 0){
                 itemHolder.ivArrow.setVisibility(View.VISIBLE);
                 if(curExpandChapterIndex == position){

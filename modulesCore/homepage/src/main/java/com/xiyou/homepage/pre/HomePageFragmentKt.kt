@@ -1,3 +1,4 @@
+
 package com.xiyou.homepage.pre
 
 import android.os.Bundle
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.xiyou.advance.modulespublic.common.net.BaseResponse
 import com.xiyou.advance.modulespublic.common.net.CourseInfo
 import com.xiyou.advance.modulespublic.common.net.GetRequest
 import com.xiyou.advance.modulespublic.common.utils.ProgressUtil
@@ -45,7 +47,7 @@ class HomePageFragmentKt : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //create the view model.
-        viewModel = ViewModelProvider(this).get(HomePageViewModel::class.java)
+//        viewModel = ViewModelProvider(this).get(HomePageViewModel::class.java)
         initData()
     }
 
@@ -102,11 +104,33 @@ class HomePageFragmentKt : Fragment() {
 
     @Deprecated("")
     fun initRetrofit() {
-        ProgressUtil.showProgressDialog("正在加载", "正在加载... ", context)
+        ProgressUtil.showProgressDialog("正在加载", "正在加载... ", activity)
         val retrofit = Retrofit.Builder().baseUrl("http://8.142.65.201:8080")
             .addConverterFactory(MoshiConverterFactory.create()).build()
         val getRequest = retrofit.create(GetRequest::class.java)
         val call = getRequest.courses
+        call.enqueue(object : Callback<BaseResponse<List<CourseInfo?>>> {
+            override fun onResponse(
+                call: Call<BaseResponse<List<CourseInfo?>>>,
+                response: Response<BaseResponse<List<CourseInfo?>>>
+            ) {
+                Log.d(
+                    TAG,
+                    "onresponsebody:" + response.body()!!.data.size + response.body() + ",errorbody:" + response.errorBody() + ",message:" + response.message()
+                )
+                courseList = response.body()!!.data
+                val adapter_homepageRecycler = Adapter_HomepageRecycler(newsList, courseList)
+                recyclerView!!.adapter = adapter_homepageRecycler
+                adapter_homepageRecycler.notifyDataSetChanged()
+                ProgressUtil.hideProgressDialog()
+            }
+
+            override fun onFailure(call: Call<BaseResponse<List<CourseInfo?>>>, t: Throwable) {
+                Log.d(TAG, "error+$t")
+                Toast.makeText(recyclerView!!.context, "访问失败，服务器出了问题", Toast.LENGTH_SHORT).show()
+                ProgressUtil.hideProgressDialog()
+            }
+        })
 //        call.enqueue(object : Callback<List<CourseInfo?>> {
 //            override fun onResponse(
 //                call: Call<List<CourseInfo?>>,

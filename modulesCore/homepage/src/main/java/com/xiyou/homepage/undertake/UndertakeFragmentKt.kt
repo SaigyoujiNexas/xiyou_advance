@@ -48,7 +48,7 @@ class UndertakeFragmentKt : Fragment() {
     private var tabs :Array<String> = arrayOf("简介","评论")
     private var edit_card_fragment : CardView? = null
     private var courseList : List<CourseInfo>? = null
-
+    private var courseId = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -61,21 +61,26 @@ class UndertakeFragmentKt : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_undertake_kt, container, false)
-        //        myRequestPermissions();
-       // fab_fragment_undertake = view.findViewById(R.id.fab)
+        val view = inflater.inflate(R.layout.fragment_undertake, container, false)
+        myRequestPermissions()
+        //fab_fragment_undertake = view.findViewById(R.id.fab_fragment_undertake);
+        //fab_fragment_undertake = view.findViewById(R.id.fab_fragment_undertake);
         edit_card_fragment = view.findViewById(R.id.edit_card_fragment)
         edit_fragment_undertake = view.findViewById(R.id.edit_fragment_undertake)
         img_undertake = view.findViewById(R.id.img_undertake)
+        val bundle = arguments
+        imgStr = bundle!!.getString("img")
+        //ToastUtil.INSTANCE.showToast(imgStr);
+        //ToastUtil.INSTANCE.showToast(imgStr);
+        Log.d(TAG, imgStr!!)
         Glide.with(requireContext())
             .load(imgStr)
-            .placeholder(com.advance.modulespublic.common.R.drawable.img0)//图片加载出来前，显示的图
-            .error(com.advance.modulespublic.common.R.drawable.img0)//图片加载失败后，显示的图片
+            .placeholder(com.advance.modulespublic.common.R.drawable.img0) //图片加载出来前，显示的图片
+            .error(com.advance.modulespublic.common.R.drawable.img_1) //图片加载失败后，显示的图片
             .into(img_undertake!!)
         viewpager2_undertake = view.findViewById(R.id.viewpager2_undertake)
         tab_undertake = view.findViewById(R.id.tab_undertake)
-        var adapter_undertake = Adapter_Undertake(courseList)
+        val adapter_undertake = Adapter_Undertake(courseList, courseId)
         viewpager2_undertake!!.setAdapter(adapter_undertake)
         viewpager2_undertake!!.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
         viewpager2_undertake!!.registerOnPageChangeCallback(object : OnPageChangeCallback() {
@@ -89,8 +94,7 @@ class UndertakeFragmentKt : Fragment() {
 
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                if (position == 1) edit_card_fragment!!.setVisibility(View.VISIBLE)
-                else edit_card_fragment!!.setVisibility(
+                if (position == 1) edit_card_fragment!!.setVisibility(View.VISIBLE) else edit_card_fragment!!.setVisibility(
                     View.INVISIBLE
                 )
             }

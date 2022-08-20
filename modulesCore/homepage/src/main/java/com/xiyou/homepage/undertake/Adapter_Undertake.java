@@ -13,9 +13,10 @@ import java.util.List;
 
 public class Adapter_Undertake extends RecyclerView.Adapter{
     List<CourseInfo> list;
-
-    public Adapter_Undertake(List<CourseInfo> list) {
+    int courseId;
+    public Adapter_Undertake(List<CourseInfo> list,int courseId) {
         this.list = list;
+        this.courseId = courseId;
     }
 
     public enum ItemType {
@@ -37,10 +38,11 @@ public class Adapter_Undertake extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        //int courseId = list.get(position).courseId;
         if(holder instanceof Viewholder0_Expand_Undertake){
-            ((Viewholder0_Expand_Undertake) holder).initRetrofit();
+            ((Viewholder0_Expand_Undertake) holder).initRetrofit(courseId);
         }else if(holder instanceof Viewholder1_Expand_Undertake){
-            ((Viewholder1_Expand_Undertake) holder).initRetrofit();
+            ((Viewholder1_Expand_Undertake) holder).initRetrofit(courseId);
         }
     }
 

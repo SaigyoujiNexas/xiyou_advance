@@ -26,7 +26,6 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.xiyou.advance.modulespublic.common.net.CourseInfo;
-import com.xiyou.advance.modulespublic.common.utils.ToastUtil;
 import com.xiyou.homepage.R;
 
 import java.util.List;
@@ -47,6 +46,8 @@ public class UndertakeFragment extends Fragment {
     CardView edit_card_fragment;
     private List<CourseInfo> courseList;
     String imgStr;
+    int courseId;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class UndertakeFragment extends Fragment {
         img_undertake = view.findViewById(R.id.img_undertake);
         Bundle bundle=getArguments();
         imgStr=bundle.getString("img");
-        ToastUtil.INSTANCE.showToast(imgStr);
+        //ToastUtil.INSTANCE.showToast(imgStr);
         Log.d(TAG,imgStr);
         Glide.with(getContext())
                 .load(imgStr)
@@ -67,7 +68,7 @@ public class UndertakeFragment extends Fragment {
                 .into(img_undertake);
         viewpager2_undertake = view.findViewById(R.id.viewpager2_undertake);
         tab_undertake = view.findViewById(R.id.tab_undertake);
-        Adapter_Undertake adapter_undertake  = new Adapter_Undertake(courseList);
+        Adapter_Undertake adapter_undertake  = new Adapter_Undertake(courseList,courseId);
         viewpager2_undertake.setAdapter(adapter_undertake);
         viewpager2_undertake.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         viewpager2_undertake.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

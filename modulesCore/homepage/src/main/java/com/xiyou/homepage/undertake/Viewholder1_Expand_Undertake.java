@@ -58,7 +58,7 @@ public class Viewholder1_Expand_Undertake extends RecyclerView.ViewHolder {
         mRecyclerView.setAdapter(adapter_viewholder1_undertake);
         mRecyclerView.setLayoutManager(linearLayoutManager);
     }
-    void initRetrofit(){
+    void initRetrofit(int courseId){
         Log.d(TAG,"initRetrofit");
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://8.142.65.201:8080").addConverterFactory(MoshiConverterFactory.create()).build();
         GetRequest getRequest = retrofit.create(GetRequest.class);

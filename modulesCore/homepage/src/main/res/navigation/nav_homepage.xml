@@ -6,7 +6,7 @@
     android:id="@+id/nav_homepage">
     <fragment
         android:id="@+id/nav_frag_homepage"
-        android:name="com.xiyou.homepage.pre.HomePageFragment"
+        android:name="com.xiyou.homepage.pre.HomePageFragmentKt"
         tools:layout="@layout/fragment_homepage"
         android:label="首页">
         <action
@@ -19,7 +19,7 @@
         android:id="@+id/undertakeFragment"
         android:label="课程"
         tools:layout="@layout/fragment_undertake"
-        android:name="com.xiyou.homepage.undertake.UndertakeFragment" >
+        android:name="com.xiyou.homepage.undertake.UndertakeFragmentKt" >
         <action
             android:id="@+id/action_undertake_to_web_video"
             app:destination="@id/web_video_fragment"

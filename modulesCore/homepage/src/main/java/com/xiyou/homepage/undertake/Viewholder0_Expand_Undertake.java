@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xiyou.advance.modulespublic.common.net.BaseResponseTwo;
+import com.xiyou.advance.modulespublic.common.net.ChapterInfo1;
 import com.xiyou.advance.modulespublic.common.net.CourseInfo;
 import com.xiyou.advance.modulespublic.common.net.GetRequest;
 import com.xiyou.homepage.R;
@@ -16,6 +18,9 @@ import com.xiyou.homepage.R;
 import java.util.List;
 import java.util.Objects;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
@@ -34,21 +39,21 @@ public class Viewholder0_Expand_Undertake extends RecyclerView.ViewHolder {
 
     public void initData(){
         Log.d(TAG,"initData");
-        mCourseInfo = courseList.get(0);
-        for (int i = 0; i < courseList.size(); i++) {
-            CourseInfo courseInfo = courseList.get(i);
-//            for (int j = 0; j < list.size(); j++) {
-//                ChapterInfo chapterInfo = list.get(j);
+        //mCourseInfo = courseList.get(0);
+//        for (int i = 0; i < courseList.size(); i++) {
+//            CourseInfo courseInfo = courseList.get(i);
+//            for (int j = 0; j < courseList.size(); j++) {
+//                ChapterInfo chapterInfo = courseList.get(j);
 //                chapterInfo.setChapterIndex(j);
-//            }
-        }
+////            }
+        //}
     }
 
     public void initViews(){
         Log.d(TAG,"initViews");
         mRecyclerView = (RecyclerView) itemView.findViewById(R.id.recycler_viewholder0_undertake);
         title_viewholder0_undertake = itemView.findViewById(R.id.title_viewholder0_undertake);
-        title_viewholder0_undertake.setText(courseList.get(0).title);
+//        title_viewholder0_undertake.setText(courseList.get(0).title);
         final Adapter_ExpandRecyclerview chapterAdapter = new Adapter_ExpandRecyclerview(mCourseInfo);
         mRecyclerView.setAdapter(chapterAdapter);
         chapterAdapter.notifyDataSetChanged();
@@ -91,26 +96,28 @@ public class Viewholder0_Expand_Undertake extends RecyclerView.ViewHolder {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
     }
-    public void initRetrofit(){
+    public void initRetrofit(int courseId){
         Log.d(TAG,"initRetrofit");
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://8.142.65.201:8080").addConverterFactory(MoshiConverterFactory.create()).build();
         GetRequest getRequest = retrofit.create(GetRequest.class);
-//        Call<List<CourseInfo>> call = getRequest.getCourses();
-//        call.enqueue(new Callback<List<CourseInfo>>() {
-//            @Override
-//            public void onResponse(Call<List<CourseInfo>> call, Response<List<CourseInfo>> response) {
-//                Log.d(TAG,"onresponsebody:"+response.body()+",errorbody:"+response.errorBody()+",message:"+response.message()+"responsesize:"+response.body().size());
-//                Log.d(TAG,"name"+response.body().get(0).title);
-//                courseList = response.body();
-//                initData();
+        Call<BaseResponseTwo<List<ChapterInfo1>>> call = getRequest.getContent("1");
+        call.enqueue(new Callback<BaseResponseTwo<List<ChapterInfo1>>>() {
+            @Override
+            public void onResponse(Call<BaseResponseTwo<List<ChapterInfo1>>> call, Response<BaseResponseTwo<List<ChapterInfo1>>> response) {
+               // Log.d(TAG,"onresponsebody:"+response.body()+",errorbody:"+response.errorBody()+",message:"+response.message()+"responsesize:"+response.body().size());
+               // Log.d(TAG,"name:"+response.body().get(0).courseId+","+response.body().get(0).name);
+                //courseList = response.body();
+                Log.d(TAG,"onresponsebody:"+response.body()+",errorbody:"+response.errorBody()+",message:"+response.message());
+                //Log.d(TAG,"code:"+response.body().getCode());
+////                initData();
 //                initViews();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<CourseInfo>> call, Throwable t) {
-//                Log.d(TAG,"error+"+t.toString());
-//            }
-//        });
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponseTwo<List<ChapterInfo1>>> call, Throwable t) {
+                Log.d(TAG,"error+"+t.toString());
+            }
+        });
     }
 
     private void onClickChapter(int chapterIndex){

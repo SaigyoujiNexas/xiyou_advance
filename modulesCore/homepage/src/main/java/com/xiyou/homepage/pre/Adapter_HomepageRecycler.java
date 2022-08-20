@@ -54,6 +54,7 @@ public class Adapter_HomepageRecycler extends RecyclerView.Adapter<Adapter_Homep
                     NavController controller = Navigation.findNavController(holder.item_hpr_title);
                     Bundle bundle = new Bundle();
                     bundle.putString("img", courseList.get(position).cover);
+                    bundle.putInt("courseId",courseList.get(position).courseId);
                     Log.d(TAG, position+","+courseList.get(position).cover);
                     //Navigation.createNavigateOnClickListener(R.id.action_homepage_to_undertake,bundle);
                     controller.navigate(R.id.action_homepage_to_undertake, bundle);
