@@ -11,11 +11,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xiyou.advance.modulespublic.common.net.BaseResponse;
 import com.xiyou.advance.modulespublic.common.net.CourseInfo;
 import com.xiyou.advance.modulespublic.common.net.GetRequest;
 import com.xiyou.advance.modulespublic.common.utils.ProgressUtil;
@@ -138,30 +138,30 @@ public class HomePageFragment extends Fragment {
                 }
         );
         //对 course 进行观察
-        viewModel.getCourses().observe(getViewLifecycleOwner(), new Observer<List<CourseInfo>>() {
-            @Override
-            public void onChanged(List<CourseInfo> courseInfos) {
-                //如果不为0
-                if(courseInfos.size() >0) {
-                    Adapter_HomepageRecycler adapter_homepageRecycler = new Adapter_HomepageRecycler(newsList, courseInfos);
-                    recyclerView.setAdapter(adapter_homepageRecycler);
-                    adapter_homepageRecycler.notifyDataSetChanged();
-                }
-            }
-        });
+//        viewModel.getCourses().observe(getViewLifecycleOwner(), new Observer<List<CourseInfo>>() {
+//            @Override
+//            public void onChanged(List<CourseInfo> courseInfos) {
+//                //如果不为0
+//                if(courseInfos.size() >0) {
+//                    Adapter_HomepageRecycler adapter_homepageRecycler = new Adapter_HomepageRecycler(newsList, courseInfos);
+//                    recyclerView.setAdapter(adapter_homepageRecycler);
+//                    adapter_homepageRecycler.notifyDataSetChanged();
+//                }
+//            }
+//        });
     }
 
     @Deprecated
     public void initRetrofit(){
-        ProgressUtil.showProgressDialog("正在加载","正在加载... ",getContext());
+        ProgressUtil.showProgressDialog("正在加载","正在加载... ",getActivity());
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://8.142.65.201:8080").addConverterFactory(MoshiConverterFactory.create()).build();
         GetRequest getRequest = retrofit.create(GetRequest.class);
-        Call<List<CourseInfo>> call = getRequest.getCourses();
-        call.enqueue(new Callback<List<CourseInfo>>() {
+        Call<BaseResponse<List<CourseInfo>>> call = getRequest.getCourses();
+        call.enqueue(new Callback<BaseResponse<List<CourseInfo>>>() {
             @Override
-            public void onResponse(Call<List<CourseInfo>> call, Response<List<CourseInfo>> response) {
-                Log.d(TAG,"onresponsebody:"+response.body()+",errorbody:"+response.errorBody()+",message:"+response.message());
-                courseList = response.body();
+            public void onResponse(Call<BaseResponse<List<CourseInfo>>> call, Response<BaseResponse<List<CourseInfo>>> response) {
+                Log.d(TAG,"onresponsebody:"+response.body().getData().size()+response.body()+",errorbody:"+response.errorBody()+",message:"+response.message());
+                courseList = response.body().getData();
                 Adapter_HomepageRecycler adapter_homepageRecycler = new Adapter_HomepageRecycler(newsList, courseList);
                 recyclerView.setAdapter(adapter_homepageRecycler);
                 adapter_homepageRecycler.notifyDataSetChanged();
@@ -169,7 +169,7 @@ public class HomePageFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<CourseInfo>> call, Throwable t) {
+            public void onFailure(Call<BaseResponse<List<CourseInfo>>> call, Throwable t) {
                 Log.d(TAG,"error+"+t.toString());
                 Toast.makeText(recyclerView.getContext(), "访问失败，服务器出了问题", Toast.LENGTH_SHORT).show();
                 ProgressUtil.hideProgressDialog();

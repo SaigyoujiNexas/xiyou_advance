@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.xiyou.advance.modulespublic.common.net.CourseInfo;
+import com.xiyou.advance.modulespublic.common.utils.ToastUtil;
 import com.xiyou.homepage.R;
 
 import java.util.List;
@@ -57,10 +58,12 @@ public class UndertakeFragment extends Fragment {
         img_undertake = view.findViewById(R.id.img_undertake);
         Bundle bundle=getArguments();
         imgStr=bundle.getString("img");
+        ToastUtil.INSTANCE.showToast(imgStr);
+        Log.d(TAG,imgStr);
         Glide.with(getContext())
                 .load(imgStr)
                 .placeholder(com.advance.modulespublic.common.R.drawable.img0)//图片加载出来前，显示的图片
-                .error(com.advance.modulespublic.common.R.drawable.img0)//图片加载失败后，显示的图片
+                .error(com.advance.modulespublic.common.R.drawable.img_1)//图片加载失败后，显示的图片
                 .into(img_undertake);
         viewpager2_undertake = view.findViewById(R.id.viewpager2_undertake);
         tab_undertake = view.findViewById(R.id.tab_undertake);

@@ -86,25 +86,25 @@ class Viewholder0_Expand_UndertakeKt(itemView: View) : RecyclerView.ViewHolder(i
             .addConverterFactory(MoshiConverterFactory.create()).build()
         val getRequest = retrofit.create(GetRequest::class.java)
         val call = getRequest.courses
-        call.enqueue(object : Callback<List<CourseInfo>> {
-            override fun onResponse(
-                call: Call<List<CourseInfo>>,
-                response: Response<List<CourseInfo>>
-            ) {
-                Log.d(
-                    TAG,
-                    "onresponsebody:" + response.body() + ",errorbody:" + response.errorBody() + ",message:" + response.message() + "responsesize:" + response.body()!!.size
-                )
-                Log.d(TAG, "name" + response.body()!![0].title)
-                courseList = response.body()
-                initData()
-                initViews()
-            }
-
-            override fun onFailure(call: Call<List<CourseInfo>>, t: Throwable) {
-                Log.d(TAG, "error+$t")
-            }
-        })
+//        call.enqueue(object : Callback<List<CourseInfo>> {
+//            override fun onResponse(
+//                call: Call<List<CourseInfo>>,
+//                response: Response<List<CourseInfo>>
+//            ) {
+//                Log.d(
+//                    TAG,
+//                    "onresponsebody:" + response.body() + ",errorbody:" + response.errorBody() + ",message:" + response.message() + "responsesize:" + response.body()!!.size
+//                )
+//                Log.d(TAG, "name" + response.body()!![0].title)
+//                courseList = response.body()
+//                initData()
+//                initViews()
+//            }
+//
+//            override fun onFailure(call: Call<List<CourseInfo>>, t: Throwable) {
+//                Log.d(TAG, "error+$t")
+//            }
+//        })
     }
 
     private fun onClickChapter(chapterIndex: Int) {

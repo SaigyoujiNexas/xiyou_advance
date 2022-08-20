@@ -9,7 +9,7 @@ public interface GetRequest {
     @GET("/getSection")
     Call<List<ChapterInfo>> getSection();
     @GET("/getRecommand")
-    Call<List<CourseInfo>> getCourses();
+    Call<BaseResponse<List<CourseInfo>>> getCourses();
     @GET("/getRecommand")
     Call<List<Comment_Course>> getComments();
 }

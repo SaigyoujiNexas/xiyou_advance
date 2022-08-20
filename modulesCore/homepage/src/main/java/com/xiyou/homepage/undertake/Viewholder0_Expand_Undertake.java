@@ -16,9 +16,6 @@ import com.xiyou.homepage.R;
 import java.util.List;
 import java.util.Objects;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
@@ -98,22 +95,22 @@ public class Viewholder0_Expand_Undertake extends RecyclerView.ViewHolder {
         Log.d(TAG,"initRetrofit");
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://8.142.65.201:8080").addConverterFactory(MoshiConverterFactory.create()).build();
         GetRequest getRequest = retrofit.create(GetRequest.class);
-        Call<List<CourseInfo>> call = getRequest.getCourses();
-        call.enqueue(new Callback<List<CourseInfo>>() {
-            @Override
-            public void onResponse(Call<List<CourseInfo>> call, Response<List<CourseInfo>> response) {
-                Log.d(TAG,"onresponsebody:"+response.body()+",errorbody:"+response.errorBody()+",message:"+response.message()+"responsesize:"+response.body().size());
-                Log.d(TAG,"name"+response.body().get(0).title);
-                courseList = response.body();
-                initData();
-                initViews();
-            }
-
-            @Override
-            public void onFailure(Call<List<CourseInfo>> call, Throwable t) {
-                Log.d(TAG,"error+"+t.toString());
-            }
-        });
+//        Call<List<CourseInfo>> call = getRequest.getCourses();
+//        call.enqueue(new Callback<List<CourseInfo>>() {
+//            @Override
+//            public void onResponse(Call<List<CourseInfo>> call, Response<List<CourseInfo>> response) {
+//                Log.d(TAG,"onresponsebody:"+response.body()+",errorbody:"+response.errorBody()+",message:"+response.message()+"responsesize:"+response.body().size());
+//                Log.d(TAG,"name"+response.body().get(0).title);
+//                courseList = response.body();
+//                initData();
+//                initViews();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<CourseInfo>> call, Throwable t) {
+//                Log.d(TAG,"error+"+t.toString());
+//            }
+//        });
     }
 
     private void onClickChapter(int chapterIndex){

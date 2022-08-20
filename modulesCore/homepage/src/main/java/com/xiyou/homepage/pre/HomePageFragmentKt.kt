@@ -107,27 +107,27 @@ class HomePageFragmentKt : Fragment() {
             .addConverterFactory(MoshiConverterFactory.create()).build()
         val getRequest = retrofit.create(GetRequest::class.java)
         val call = getRequest.courses
-        call.enqueue(object : Callback<List<CourseInfo?>> {
-            override fun onResponse(
-                call: Call<List<CourseInfo?>>,
-                response: Response<List<CourseInfo?>>
-            ) {
-                Log.d(
-                    TAG,
-                    "onresponsebody:" + response.body() + ",errorbody:" + response.errorBody() + ",message:" + response.message()
-                )
-                courseList = response.body()
-                val adapter_homepageRecycler = Adapter_HomepageRecycler(newsList, courseList)
-                recyclerView!!.adapter = adapter_homepageRecycler
-                adapter_homepageRecycler.notifyDataSetChanged()
-                ProgressUtil.hideProgressDialog()
-            }
-
-            override fun onFailure(call: Call<List<CourseInfo?>>, t: Throwable) {
-                Log.d(TAG, "error+$t")
-                Toast.makeText(recyclerView!!.context, "访问失败，服务器出了问题", Toast.LENGTH_SHORT).show()
-                ProgressUtil.hideProgressDialog()
-            }
-        })
+//        call.enqueue(object : Callback<List<CourseInfo?>> {
+//            override fun onResponse(
+//                call: Call<List<CourseInfo?>>,
+//                response: Response<List<CourseInfo?>>
+//            ) {
+//                Log.d(
+//                    TAG,
+//                    "onresponsebody:" + response.body() + ",errorbody:" + response.errorBody() + ",message:" + response.message()
+//                )
+//                courseList = response.body()
+//                val adapter_homepageRecycler = Adapter_HomepageRecycler(newsList, courseList)
+//                recyclerView!!.adapter = adapter_homepageRecycler
+//                adapter_homepageRecycler.notifyDataSetChanged()
+//                ProgressUtil.hideProgressDialog()
+//            }
+//
+//            override fun onFailure(call: Call<List<CourseInfo?>>, t: Throwable) {
+//                Log.d(TAG, "error+$t")
+//                Toast.makeText(recyclerView!!.context, "访问失败，服务器出了问题", Toast.LENGTH_SHORT).show()
+//                ProgressUtil.hideProgressDialog()
+//            }
+//        })
     }
 }
