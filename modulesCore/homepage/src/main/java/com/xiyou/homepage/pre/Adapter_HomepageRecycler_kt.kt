@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.xiyou.advance.modulespublic.common.net.CourseInfo
+import com.xiyou.advance.modulespublic.common.bean.CourseInfo
 import com.xiyou.homepage.R
 
 class Adapter_HomepageRecycler_kt(

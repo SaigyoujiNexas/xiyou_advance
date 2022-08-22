@@ -14,10 +14,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.xiyou.advance.modulespublic.common.net.BaseInfo;
-import com.xiyou.advance.modulespublic.common.net.ChapterInfo;
-import com.xiyou.advance.modulespublic.common.net.CourseInfo;
-import com.xiyou.advance.modulespublic.common.net.SectionInfo;
+import com.xiyou.advance.modulespublic.common.bean.BaseInfo;
+import com.xiyou.advance.modulespublic.common.bean.ChapterInfo;
+import com.xiyou.advance.modulespublic.common.bean.CourseInfo;
+import com.xiyou.advance.modulespublic.common.bean.SectionInfo;
 import com.xiyou.homepage.R;
 
 import java.util.ArrayList;

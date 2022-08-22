@@ -1,18 +1,28 @@
 package com.xiyou.advance.modulespublic.common.net;
 
+import com.xiyou.advance.modulespublic.common.bean.ChapterInfo;
+import com.xiyou.advance.modulespublic.common.bean.CourseInfo;
+import com.xiyou.advance.modulespublic.common.bean.SectionInfo;
+
 import java.util.List;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
 
 public interface GetRequest {
-//    @GET("/getSection")
-//    Call<List<ChapterInfo>> getSection();
-    @GET("/getRecommand")
+    @GET("/getSection")
+    Call<BaseResponseTwo<List<SectionInfo>>> getSection();
+    @POST("/getRecommand")
     Call<BaseResponse<List<CourseInfo>>> getCourses();
-    @GET("/getRecommand")
+    @POST("/getRecommand")
     Call<List<Comment_Course>> getComments();
-    @GET("/getContent" )
-    Call<BaseResponseTwo<List<ChapterInfo1>>> getContent(@Query("courseId") String courseId);
+
+    @POST("getContent" )
+    @Headers("Content-Type:application/json;charset=utf-8")
+    Call<BaseResponseTwo<List<ChapterInfo>>> getContent3(@Body RequestBody body);
+
 }

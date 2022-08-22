@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.xiyou.advance.modulespublic.common.net.CourseInfo;
+import com.xiyou.advance.modulespublic.common.bean.CourseInfo;
 import com.xiyou.homepage.R;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 public class Adapter_Undertake extends RecyclerView.Adapter{
     List<CourseInfo> list;
     int courseId;
-    public Adapter_Undertake(List<CourseInfo> list,int courseId) {
+    public Adapter_Undertake(List<CourseInfo> list, int courseId) {
         this.list = list;
         this.courseId = courseId;
     }

@@ -8,11 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xiyou.advance.modulespublic.common.net.BaseResponse
-import com.xiyou.advance.modulespublic.common.net.CourseInfo
+import com.xiyou.advance.modulespublic.common.bean.CourseInfo
 import com.xiyou.advance.modulespublic.common.net.GetRequest
 import com.xiyou.advance.modulespublic.common.utils.ProgressUtil
 import com.xiyou.homepage.R
@@ -37,7 +36,7 @@ class HomePageFragmentKt : Fragment() {
     var newsList: MutableList<News_Homepage> = ArrayList()
     var recyclerView: RecyclerView? = null
     val TAG = "HomePageFragmentTAG"
-    private var courseList: List<CourseInfo?>? = null
+    private var courseList: List<com.xiyou.advance.modulespublic.common.bean.CourseInfo?>? = null
     private var viewModel: HomePageViewModel? = null
     fun HomePageFragment() {
         // Required empty public constructor
@@ -109,10 +108,10 @@ class HomePageFragmentKt : Fragment() {
             .addConverterFactory(MoshiConverterFactory.create()).build()
         val getRequest = retrofit.create(GetRequest::class.java)
         val call = getRequest.courses
-        call.enqueue(object : Callback<BaseResponse<List<CourseInfo?>>> {
+        call.enqueue(object : Callback<BaseResponse<List<com.xiyou.advance.modulespublic.common.bean.CourseInfo?>>> {
             override fun onResponse(
-                call: Call<BaseResponse<List<CourseInfo?>>>,
-                response: Response<BaseResponse<List<CourseInfo?>>>
+                call: Call<BaseResponse<List<com.xiyou.advance.modulespublic.common.bean.CourseInfo?>>>,
+                response: Response<BaseResponse<List<com.xiyou.advance.modulespublic.common.bean.CourseInfo?>>>
             ) {
                 Log.d(
                     TAG,
@@ -125,7 +124,7 @@ class HomePageFragmentKt : Fragment() {
                 ProgressUtil.hideProgressDialog()
             }
 
-            override fun onFailure(call: Call<BaseResponse<List<CourseInfo?>>>, t: Throwable) {
+            override fun onFailure(call: Call<BaseResponse<List<com.xiyou.advance.modulespublic.common.bean.CourseInfo?>>>, t: Throwable) {
                 Log.d(TAG, "error+$t")
                 Toast.makeText(recyclerView!!.context, "访问失败，服务器出了问题", Toast.LENGTH_SHORT).show()
                 ProgressUtil.hideProgressDialog()

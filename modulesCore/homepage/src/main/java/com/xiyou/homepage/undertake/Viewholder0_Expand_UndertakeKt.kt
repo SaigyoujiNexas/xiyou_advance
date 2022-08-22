@@ -6,13 +6,10 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.xiyou.advance.modulespublic.common.net.CourseInfo
+import com.xiyou.advance.modulespublic.common.bean.CourseInfo
 import com.xiyou.advance.modulespublic.common.net.GetRequest
 import com.xiyou.homepage.R
 import com.xiyou.homepage.undertake.Adapter_ExpandRecyclerview.ViewName
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.*
@@ -22,9 +19,9 @@ class Viewholder0_Expand_UndertakeKt(itemView: View) : RecyclerView.ViewHolder(i
         this.context  = context
     }
     var mRecyclerView: RecyclerView? = null
-    var mCourseInfo: CourseInfo? = null
+    var mCourseInfo: com.xiyou.advance.modulespublic.common.bean.CourseInfo? = null
     var context: Context? = null
-    private var courseList: List<CourseInfo>? = null
+    private var courseList: List<com.xiyou.advance.modulespublic.common.bean.CourseInfo>? = null
     var title_viewholder0_undertake: TextView? = null
     val TAG = "Viewholder0TAG"
 

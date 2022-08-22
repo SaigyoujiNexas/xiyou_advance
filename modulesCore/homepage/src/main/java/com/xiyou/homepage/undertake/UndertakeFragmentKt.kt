@@ -23,13 +23,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
-import com.xiyou.advance.modulespublic.common.net.CourseInfo
+import com.xiyou.advance.modulespublic.common.bean.CourseInfo
 import com.xiyou.homepage.R
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "img"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM1_IMG = "img"
+private const val ARG_PARAM2_NAME = "name"
+private const val ARG_PARAM3_ID = "name"
 
 /**
  * A simple [Fragment] subclass.
@@ -39,7 +40,8 @@ private const val ARG_PARAM2 = "param2"
 class UndertakeFragmentKt : Fragment() {
     // TODO: Rename and change types of parameters
     private var imgStr: String? = null
-    private var param2: String? = null
+    private var nameStr: String? = null
+    private var idStr: String? = null
     private var img_undertake : ImageView? = null
     private var viewpager2_undertake : ViewPager2? = null
     private var tab_undertake : TabLayout? = null
@@ -47,13 +49,13 @@ class UndertakeFragmentKt : Fragment() {
     private var edit_fragment_undertake : EditText? = null
     private var tabs :Array<String> = arrayOf("简介","评论")
     private var edit_card_fragment : CardView? = null
-    private var courseList : List<CourseInfo>? = null
-    private var courseId = 0
+    private var courseList : List<com.xiyou.advance.modulespublic.common.bean.CourseInfo>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            imgStr = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            imgStr = it.getString(ARG_PARAM1_IMG)
+            nameStr = it.getString(ARG_PARAM2_NAME)
+            idStr = it.getString(ARG_PARAM3_ID)
         }
     }
 
@@ -80,7 +82,7 @@ class UndertakeFragmentKt : Fragment() {
             .into(img_undertake!!)
         viewpager2_undertake = view.findViewById(R.id.viewpager2_undertake)
         tab_undertake = view.findViewById(R.id.tab_undertake)
-        val adapter_undertake = Adapter_Undertake(courseList, courseId)
+        val adapter_undertake = Adapter_Undertake(courseList, Integer.parseInt(idStr))
         viewpager2_undertake!!.setAdapter(adapter_undertake)
         viewpager2_undertake!!.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
         viewpager2_undertake!!.registerOnPageChangeCallback(object : OnPageChangeCallback() {
@@ -178,13 +180,13 @@ class UndertakeFragmentKt : Fragment() {
          * @return A new instance of fragment UndertakeFragmentKt.
          */
         // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            UndertakeFragmentKt().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+//        @JvmStatic
+//        fun newInstance(param1: String, param2: String) =
+//            UndertakeFragmentKt().apply {
+//                arguments = Bundle().apply {
+//                    putString(ARG_PARAM1, param1)
+//                    putString(ARG_PARAM2, param2)
+//                }
+//            }
     }
 }

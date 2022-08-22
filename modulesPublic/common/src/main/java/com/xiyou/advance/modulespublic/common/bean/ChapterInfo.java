@@ -1,4 +1,4 @@
-package com.xiyou.advance.modulespublic.common.net;
+package com.xiyou.advance.modulespublic.common.bean;
 
 import java.util.ArrayList;
 import java.util.List;

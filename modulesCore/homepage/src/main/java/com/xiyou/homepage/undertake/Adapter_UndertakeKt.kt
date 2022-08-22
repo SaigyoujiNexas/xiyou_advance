@@ -3,7 +3,7 @@
 //import android.view.LayoutInflater
 //import android.view.ViewGroup
 //import androidx.recyclerview.widget.RecyclerView
-//import com.xiyou.advance.modulespublic.common.net.CourseInfo
+//import com.xiyou.advance.modulespublic.common.bean.CourseInfo
 //import com.xiyou.homepage.R
 //
 //class Adapter_UndertakeKt() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

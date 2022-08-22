@@ -1,4 +1,4 @@
-package com.xiyou.advance.modulespublic.common.net;
+package com.xiyou.advance.modulespublic.common.bean;
 
 public class ChapterInfo1 {
     public int contentId;
