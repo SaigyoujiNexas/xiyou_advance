@@ -9,20 +9,20 @@ import java.util.List;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface GetRequest {
-    @GET("/getSection")
-    Call<BaseResponseTwo<List<SectionInfo>>> getSection();
+    @POST("getSection")
+    Call<BaseResponseTwo<List<SectionInfo>>> getSection(@Body RequestBody body);
     @POST("/getRecommand")
     Call<BaseResponse<List<CourseInfo>>> getCourses();
+
     @POST("/getRecommand")
-    Call<List<Comment_Course>> getComments();
+    Call<List<Comment_Course>> getComments(@Body RequestBody body);
 
     @POST("getContent" )
     @Headers("Content-Type:application/json;charset=utf-8")
-    Call<BaseResponseTwo<List<ChapterInfo>>> getContent3(@Body RequestBody body);
+    Call<BaseResponseTwo<List<ChapterInfo>>> getContent(@Body RequestBody body);
 
 }

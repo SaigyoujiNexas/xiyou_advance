@@ -1,6 +1,7 @@
 package com.xiyou.homepage.undertake
 
 import android.content.Context
+import android.icu.number.IntegerWidth
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -9,9 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
+import com.google.gson.Gson
 import com.xiyou.advance.modulespublic.common.net.Comment_Course
 import com.xiyou.advance.modulespublic.common.net.GetRequest
 import com.xiyou.homepage.R
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -56,10 +60,12 @@ class Viewholder1_Expand_UndertakeKt(itemView : View) : RecyclerView.ViewHolder(
     fun initRetrofit() {
         Log.d(TAG, "initRetrofit")
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://8.142.65.201:8080")
+            .baseUrl("http://8.142.65.201:8080/")
             .addConverterFactory(MoshiConverterFactory.create()).build()
         val getRequest = retrofit.create(GetRequest::class.java)
-        val call = getRequest.comments
+        val map = mapOf("courseId" to 1)
+        var requestBody = Gson().toJson(map).toRequestBody()
+        val call = getRequest.getComments(requestBody)
         call.enqueue(object : Callback<List<Comment_Course>> {
             override fun onResponse(
                 call: Call<List<Comment_Course>>,

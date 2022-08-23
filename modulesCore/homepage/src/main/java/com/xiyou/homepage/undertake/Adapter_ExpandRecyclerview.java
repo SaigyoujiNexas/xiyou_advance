@@ -34,15 +34,15 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
 
     //显示的数据集
     private List<BaseInfo> dataInfos = new ArrayList<>();
-    //当前展开的课时，-1代表没有任何展开
-    private int curExpandChapterIndex = -1;
+
+    private int curExpandChapterIndex = -1; //当前展开的课时，-1代表没有任何展开
     private int chapterCount = 1;
-    public Adapter_ExpandRecyclerview(CourseInfo _courseInfo) {
+    public Adapter_ExpandRecyclerview(CourseInfo _courseInfo,List<ChapterInfo> dataInfos) {
         this.courseInfo = _courseInfo;
-//        Log.d(TAG,courseInfo.list.size()+"");
-//        for(BaseInfo info : courseInfo.list){
-//            dataInfos.add(info);
-//        }
+        Log.d(TAG,dataInfos.size()+"");
+        for(BaseInfo info : dataInfos){
+            this.dataInfos.add(info);
+        }
     }
 
     @Override
@@ -68,8 +68,8 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
             itemHolder.itemView.setTag(position);
             ChapterInfo chapterInfo = (ChapterInfo) dataInfos.get(position);
             itemHolder.tvNumber.setText("第"+chapterCount+++"章");
-            //itemHolder.tvName.setText(chapterInfo.getTitle());
-            if(chapterInfo.list.size() > 0){
+            itemHolder.tvName.setText(chapterInfo.title1);
+            if(chapterInfo.sectionList.size() > 0){
                 itemHolder.ivArrow.setVisibility(View.VISIBLE);
                 if(curExpandChapterIndex == position){
                     itemHolder.ivArrow.setBackgroundResource(com.advance.modulespublic.common.R.drawable.arrow_up);
@@ -83,7 +83,7 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
             ItemSectionHolder itemSectionHolder = (ItemSectionHolder) holder;
             itemSectionHolder.tvName.setTag(position);
             SectionInfo sectionInfo = (SectionInfo) dataInfos.get(position);
-            itemSectionHolder.tvName.setText(sectionInfo.name);
+            itemSectionHolder.tvName.setText(sectionInfo.url);
         }
     }
 
@@ -208,14 +208,18 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
                 sectionIndex = -1;
                 if(v.getId() == R.id.tv_item_chapter_number){
                     viewName = ViewName.CHAPTER_ITEM_PRACTISE;
+                    Log.d(TAG,"1,");
                 }else{
                     viewName = ViewName.CHAPTER_ITEM;
-                    if(chapterInfo.list.size() > 0){
+                    //if(chapterInfo.list.size() > 0){
+                    if(chapterInfo.sectionList.size() > 0){
                         if(chapterIndex == curExpandChapterIndex){
                             narrow(curExpandChapterIndex);
+                            Log.d(TAG,"2,"+chapterIndex+curExpandChapterIndex);
                         }else{
                             narrow(curExpandChapterIndex);
                             expand(chapterIndex);
+                            Log.d(TAG,"3,"+chapterIndex+curExpandChapterIndex);
                         }
                     }
                 }
@@ -227,7 +231,7 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
                 NavController controller= Navigation.findNavController(v);
                 Bundle bundle=new Bundle();
                 bundle.putString("videoData",sectionInfo.url);
-                Log.d(TAG,"");
+                Log.d(TAG,"4,"+sectionIndex+chapterIndex);
                 controller.navigate(R.id.action_undertake_to_web_video,bundle);
             }
             mOnItemClickListener.onClick(v, viewName, chapterIndex, sectionIndex);
@@ -244,6 +248,14 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
 //        Log.v(TAG,"---expand---"+(chapterIndex+1)+", "+courseInfo.list.get(chapterIndex).list.size());
 //        //增
 //        notifyItemRangeInserted(chapterIndex+1, courseInfo.list.get(chapterIndex).list.size());
+        ChapterInfo chapterInfo = (ChapterInfo) dataInfos.get(chapterIndex);
+        List<SectionInfo> sectionList = chapterInfo.sectionList;
+        dataInfos.removeAll(sectionList);
+        dataInfos.addAll(chapterIndex+1,sectionList);
+        curExpandChapterIndex = chapterIndex;
+        Log.v(TAG,"---expand---"+(chapterIndex+1)+", "+sectionList.size());
+        //增
+        notifyItemRangeInserted(chapterIndex+1, sectionList.size());
 
         /*notifyItemRangeChanged(chapterIndex + 1 + courseInfo.chapterInfos.get(chapterIndex).sectionInfos.size(),
                 getItemCount() - chapterIndex - 1, "change_position");*/
@@ -261,7 +273,9 @@ public class Adapter_ExpandRecyclerview extends RecyclerView.Adapter implements 
             for(int i=removeStart; i<dataInfos.size() && getItemViewType(i) == VIEW_TYPE_SECTION; i++){
                 removeCount++;
             }
-//            dataInfos.removeAll(courseInfo.list.get(chapterIndex).list);
+            ChapterInfo chapterInfo = (ChapterInfo) dataInfos.get(chapterIndex);
+            List<SectionInfo> sectionList = chapterInfo.sectionList;
+            dataInfos.removeAll(sectionList);
             curExpandChapterIndex = -1;
             Log.v(TAG,"---narrow---"+removeStart+", "+removeCount);
             notifyItemRangeRemoved(removeStart, removeCount);

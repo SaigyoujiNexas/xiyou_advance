@@ -30,7 +30,7 @@ import com.xiyou.homepage.R
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1_IMG = "img"
 private const val ARG_PARAM2_NAME = "name"
-private const val ARG_PARAM3_ID = "name"
+private const val ARG_PARAM3_ID = "courseId"
 
 /**
  * A simple [Fragment] subclass.
@@ -41,7 +41,8 @@ class UndertakeFragmentKt : Fragment() {
     // TODO: Rename and change types of parameters
     private var imgStr: String? = null
     private var nameStr: String? = null
-    private var idStr: String? = null
+    private var idStr: Int? = null
+    private var courseInfo:CourseInfo? = null
     private var img_undertake : ImageView? = null
     private var viewpager2_undertake : ViewPager2? = null
     private var tab_undertake : TabLayout? = null
@@ -53,9 +54,13 @@ class UndertakeFragmentKt : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            imgStr = it.getString(ARG_PARAM1_IMG)
-            nameStr = it.getString(ARG_PARAM2_NAME)
-            idStr = it.getString(ARG_PARAM3_ID)
+//            imgStr = it.getString(ARG_PARAM1_IMG)
+//            nameStr = it.getString(ARG_PARAM2_NAME)
+//            idStr = it.getInt(ARG_PARAM3_ID)
+            courseInfo = it.getParcelable("it")
+            imgStr = courseInfo!!.cover
+            idStr = courseInfo!!.courseId
+            nameStr = courseInfo!!.title
         }
     }
 
@@ -70,8 +75,6 @@ class UndertakeFragmentKt : Fragment() {
         edit_card_fragment = view.findViewById(R.id.edit_card_fragment)
         edit_fragment_undertake = view.findViewById(R.id.edit_fragment_undertake)
         img_undertake = view.findViewById(R.id.img_undertake)
-        val bundle = arguments
-        imgStr = bundle!!.getString("img")
         //ToastUtil.INSTANCE.showToast(imgStr);
         //ToastUtil.INSTANCE.showToast(imgStr);
         Log.d(TAG, imgStr!!)
@@ -82,7 +85,10 @@ class UndertakeFragmentKt : Fragment() {
             .into(img_undertake!!)
         viewpager2_undertake = view.findViewById(R.id.viewpager2_undertake)
         tab_undertake = view.findViewById(R.id.tab_undertake)
-        val adapter_undertake = Adapter_Undertake(courseList, Integer.parseInt(idStr))
+        Log.d(TAG,"$idStr")
+        Log.d(TAG,"$idStr,$nameStr")
+        Log.d(TAG,"$idStr,$imgStr,$nameStr")
+        val adapter_undertake = Adapter_Undertake(courseList, idStr!!,nameStr,courseInfo)
         viewpager2_undertake!!.setAdapter(adapter_undertake)
         viewpager2_undertake!!.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
         viewpager2_undertake!!.registerOnPageChangeCallback(object : OnPageChangeCallback() {
