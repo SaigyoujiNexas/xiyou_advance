@@ -11,9 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
 import com.google.gson.Gson
+import com.xiyou.advance.modulespublic.common.constant.NetConstant
+import com.xiyou.advance.modulespublic.common.net.BaseResponse
 import com.xiyou.advance.modulespublic.common.net.Comment_Course
 import com.xiyou.advance.modulespublic.common.net.GetRequest
+import com.xiyou.advance.modulespublic.common.utils.ToastUtil
 import com.xiyou.homepage.R
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
@@ -59,27 +63,28 @@ class Viewholder1_Expand_UndertakeKt(itemView : View) : RecyclerView.ViewHolder(
 
     fun initRetrofit() {
         Log.d(TAG, "initRetrofit")
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://8.142.65.201:8080/")
-            .addConverterFactory(MoshiConverterFactory.create()).build()
-        val getRequest = retrofit.create(GetRequest::class.java)
+        val getRequest = NetConstant.retrofit.create(GetRequest::class.java)
         val map = mapOf("courseId" to 1)
-        var requestBody = Gson().toJson(map).toRequestBody()
+        val requestBody = Gson().toJson(map).toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
         val call = getRequest.getComments(requestBody)
-        call.enqueue(object : Callback<List<Comment_Course>> {
+        call.enqueue(object : Callback<BaseResponse<List<Comment_Course>>> {
             override fun onResponse(
-                call: Call<List<Comment_Course>>,
-                response: Response<List<Comment_Course>>
+                call: Call<BaseResponse<List<Comment_Course>>>,
+                response: Response<BaseResponse<List<Comment_Course>>>
             ) {
                 Log.d(
                     TAG,
-                    "onresponsebody:" + response.body() + ",errorbody:" + response.errorBody() + ",message:" + response.message() + "responsesize:" + response.body()!!.size
+                    "onresponsebody:" + response.body() + ",errorbody:" + response.errorBody() + ",message:" + response.message()
                 )
-                Log.d(TAG, "name" + response.body()!![0].comment)
-                list = response.body()!!
+                if(response.body() != null) {
+                    list = response.body()!!.data
+                    initView();
+                }else {
+                    ToastUtil.showToast("请求失败！")
+                }
             }
 
-            override fun onFailure(call: Call<List<Comment_Course>>, t: Throwable) {
+            override fun onFailure(call: Call<BaseResponse<List<Comment_Course>>>, t: Throwable) {
                 Log.d(TAG, "error+$t")
             }
         })

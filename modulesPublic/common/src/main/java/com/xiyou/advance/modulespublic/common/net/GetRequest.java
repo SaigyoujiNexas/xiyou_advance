@@ -18,8 +18,8 @@ public interface GetRequest {
     @POST("/getRecommand")
     Call<BaseResponse<List<CourseInfo>>> getCourses();
 
-    @POST("/getRecommand")
-    Call<List<Comment_Course>> getComments(@Body RequestBody body);
+    @POST("getComments")
+    Call<BaseResponse<List<Comment_Course>>> getComments(@Body RequestBody body);
 
     @POST("getContent" )
     @Headers("Content-Type:application/json;charset=utf-8")
