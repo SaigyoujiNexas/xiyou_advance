@@ -9,12 +9,11 @@
         android:id="@+id/nav_frag_question_release"
         tools:layout="@layout/fragment_question_release"
         android:label="发布问题">
-
     </fragment>
     <fragment
         android:label="社区"
         tools:layout="@layout/fragment_community"
-        android:name="com.xiyou.community.view.ui.CommunityFragment"
+        android:name="com.xiyou.community.view.ui.CommunityFragment2"
         android:id="@+id/nav_frag_community"
         >
         <action

@@ -16,10 +16,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class QuestionInfoViewModel
-@Inject
-    constructor(val repository: CommunityRepository)
+//@HiltViewModel//@Inject
+class QuestionInfoViewModel ()
     : ViewModel() {
 
     val list = MutableLiveData(listOf<QuestionCard>())
@@ -27,24 +25,26 @@ class QuestionInfoViewModel
         get()=list
     var title: String? = ""
     var content: String? = ""
+    var repository : CommunityRepository ?= null
+
     fun getAllQuestion(onSuccess:() -> Unit = {}, onFailure:() -> Unit = {}) = viewModelScope.launch {
         val res: List<QuestionCard>
         try{
-            res = repository.getAllQuestionList()
+            res = repository!!.getAllQuestionList()
             list.postValue(res)
             onSuccess.invoke()
         }catch (e: Throwable)
         {
-            ToastUtil.showToast(e.localizedMessage)
+            ToastUtil.showToast(e.localizedMessage+"!"+e.toString())
             onFailure.invoke()
         }
-
     }
+
     fun releaseQuestion(title: String, content: String, onSuccess: () -> Unit = {}) = viewModelScope.launch {
         val question = QuestionRelease(title = title, content = content)
         var res: BaseResponse<String?>?
         try{
-            res = repository.releaseQuestion(question)
+            res = repository!!.releaseQuestion(question)
         }catch(e: Throwable)
         {
             res = BaseResponse(data = e.localizedMessage, code = 200, message = e.localizedMessage)
@@ -55,11 +55,12 @@ class QuestionInfoViewModel
             false -> ToastUtil.showToast(res.msg)
         }
     }
+
     fun releaseAnswer(answer: String, onSuccess: () -> Unit) = viewModelScope.launch {
         val ans = Answer(answer)
         var res: BaseResponse<String?>?
         try{
-            res = repository.releaseAnswer(ans)
+            res = repository!!.releaseAnswer(ans)
         }catch (e: Throwable)
         {
             res = BaseResponse(data = e.localizedMessage, code = 200, message = e.localizedMessage)

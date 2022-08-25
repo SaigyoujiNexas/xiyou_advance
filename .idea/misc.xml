@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidTest/3GProject/xiyou_advance/app/src/main/res/layout/activity_start.xml" value="0.1" />
+        <entry key="..\:/AndroidTest/3GProject/xiyou_advance/modulesCore/community/src/main/res/layout/fragment_community.xml" value="0.171875" />
+        <entry key="..\:/AndroidTest/3GProject/xiyou_advance/modulesCore/community/src/main/res/layout/fragment_question_release.xml" value="0.171875" />
+        <entry key="..\:/AndroidTest/3GProject/xiyou_advance/modulesCore/community/src/main/res/layout/item_question_card.xml" value="0.171875" />
+        <entry key="..\:/AndroidTest/3GProject/xiyou_advance/modulesCore/community/src/main/res/menu/menu_community.xml" value="0.171875" />
         <entry key="..\:/AndroidTest/3GProject/xiyou_advance/modulesCore/homepage/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1015" />
         <entry key="..\:/AndroidTest/3GProject/xiyou_advance/modulesCore/homepage/src/main/res/drawable/img_round_1.xml" value="0.1015" />
         <entry key="..\:/AndroidTest/3GProject/xiyou_advance/modulesCore/homepage/src/main/res/layout/activity_main2.xml" value="0.1" />

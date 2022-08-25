@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.xiyou.advance.modulespublic.common.constant.NetConstant
 import com.xiyou.community.R
 import com.xiyou.community.databinding.FragmentCommunityBinding
 import com.xiyou.community.net.CommunityService
@@ -31,19 +30,18 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 //@AndroidEntryPoint
-class CommunityFragment : Fragment() {
+class CommunityFragment2 : Fragment() {
 
 //    private val viewModel: QuestionInfoViewModel by viewModels()
-    private lateinit var viewModel : QuestionInfoViewModel
+private lateinit var viewModel : QuestionInfoViewModel
     private lateinit var binding: FragmentCommunityBinding
-    private lateinit var repository: CommunityRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(this ,
-            ViewModelProvider.NewInstanceFactory()).get(QuestionInfoViewModel::class.java)
-        val service = NetConstant.retrofit.create(CommunityService::class.java)
-        repository = CommunityRepository(service)
+        viewModel = ViewModelProvider.NewInstanceFactory().create(QuestionInfoViewModel::class.java)
+//        ViewModelProvider(this ,
+//            ViewModelProvider.NewInstanceFactory()).get(QuestionInfoViewModel::class.java)
         viewModel.getAllQuestion({},{})
     }
 
@@ -51,6 +49,7 @@ class CommunityFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         setHasOptionsMenu(true)
         binding = FragmentCommunityBinding.inflate(inflater, container, false)
         return binding.root

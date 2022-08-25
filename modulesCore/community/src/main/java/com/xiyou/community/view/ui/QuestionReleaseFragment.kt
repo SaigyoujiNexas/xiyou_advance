@@ -22,12 +22,13 @@ import dagger.hilt.android.AndroidEntryPoint
  * An example full-screen fragment that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class QuestionReleaseFragment : Fragment() {
 
     private var _binding: FragmentQuestionReleaseBinding? = null
 
-    val viewModel: QuestionInfoViewModel by viewModels()
+    val viewModel: QuestionInfoViewModel by viewModels()//属性委托
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -46,7 +47,6 @@ class QuestionReleaseFragment : Fragment() {
         binding.etQuestionReleaseTitle.setText(viewModel.title)
         binding.etQuestionReleaseContent.setText(viewModel.content)
         binding.fabQuestionRelease.setOnClickListener {
-
             val dialog = context?.let { it1 -> DialogUtil.showLoading(it1, "上传中") }
             dialog?.show()
             viewModel.releaseQuestion(binding.etQuestionReleaseTitle.text.toString(),

@@ -76,7 +76,7 @@ class QuestionInfoFragment : Fragment() {
         binding.rvQuestionInfoAnswers.layoutManager = manager
         val adapter = QuestionAnswerAdapter(QuestionAnswerDiffCallback())
         binding.rvQuestionInfoAnswers.adapter = adapter
-        adapter.submitList(
+        adapter.submitList(//提交一个新列表进行比较和显示。
             question.answer.toList()
         )
 
