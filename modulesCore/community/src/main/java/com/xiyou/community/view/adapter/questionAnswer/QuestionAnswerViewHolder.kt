@@ -24,6 +24,7 @@ class QuestionAnswerViewHolder(val itemView: View): RecyclerView.ViewHolder(item
         date.text = ans.date
         content.text = ans.content
     }
+
     companion object{
         fun create(parent: ViewGroup): QuestionAnswerViewHolder{
             val v = LayoutInflater.from(parent.context).inflate(R.layout.item_question_answer, parent, false)

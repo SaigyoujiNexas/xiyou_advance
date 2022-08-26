@@ -21,15 +21,16 @@ class QuestionCardViewHolder(val itemView: View):RecyclerView.ViewHolder(itemVie
     private val content: TextView = itemView.findViewById(R.id.tv_question_card_content)
     private val date : TextView = itemView.findViewById(R.id.tv_question_card_date)
     private val isSolved: ImageView = itemView.findViewById(R.id.iv_question_card_solved)
+
     fun bind (question: QuestionCard)
     {
-        val bundle = bundleOf("question" to question)
+        val bundle = bundleOf("question" to question)       //这也太方便了
 
         head.load(question.head){
             crossfade(true)
             placeholder(R.mipmap.img_user)
-            
         }
+
         if(question.solved)
         {
             isSolved.visibility = View.VISIBLE
@@ -41,9 +42,11 @@ class QuestionCardViewHolder(val itemView: View):RecyclerView.ViewHolder(itemVie
         title.text = question.title
         content.text = question.comment
         date.text = question.date
+
         itemView.setOnClickListener(Navigation
             .createNavigateOnClickListener(R.id.action_community_to_questionInfo, bundle))
     }
+
     companion object{
         fun create(parent: ViewGroup): QuestionCardViewHolder {
             val v = LayoutInflater

@@ -44,7 +44,7 @@ class CommunityFragment : Fragment() {
             ViewModelProvider.NewInstanceFactory()).get(QuestionInfoViewModel::class.java)
         val service = NetConstant.retrofit.create(CommunityService::class.java)
         repository = CommunityRepository(service)
-        viewModel.getAllQuestion({},{})
+        viewModel.getAllQuestion2({},{})
     }
 
     override fun onCreateView(
@@ -58,7 +58,6 @@ class CommunityFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,6 +70,7 @@ class CommunityFragment : Fragment() {
         viewModel.questions.observe(viewLifecycleOwner){
             adapter.submitList(it)
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

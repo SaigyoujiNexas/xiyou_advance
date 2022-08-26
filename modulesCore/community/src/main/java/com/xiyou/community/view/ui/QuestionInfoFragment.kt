@@ -1,6 +1,7 @@
 package com.xiyou.community.view.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +10,15 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.xiyou.advance.modulespublic.common.constant.NetConstant
 import com.xiyou.advance.modulespublic.common.utils.DialogUtil
 import com.xiyou.advance.modulespublic.common.utils.ToastUtil
+import com.xiyou.community.data.Answer
+import com.xiyou.community.data.QuestionAnswer
 import com.xiyou.community.data.QuestionCard
 import com.xiyou.community.databinding.FragmentQuestionInfoBinding
+import com.xiyou.community.net.CommunityService
+import com.xiyou.community.repository.CommunityRepository
 import com.xiyou.community.view.adapter.questionAnswer.QuestionAnswerAdapter
 import com.xiyou.community.view.adapter.questionAnswer.QuestionAnswerDiffCallback
 import com.xiyou.community.viewModel.QuestionInfoViewModel
@@ -29,21 +35,23 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class QuestionInfoFragment : Fragment() {
 
     private var _binding: FragmentQuestionInfoBinding? = null
 
     private lateinit var question: QuestionCard
     private val binding: FragmentQuestionInfoBinding
-    get() = _binding!!
+        get() = _binding!!
 
     private val viewModel: QuestionInfoViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.
         let {
             question = it.getParcelable<QuestionCard>("question") as QuestionCard
+            Log.d(TAG,"${question.toString()}")
         }
     }
 
@@ -76,13 +84,21 @@ class QuestionInfoFragment : Fragment() {
         binding.rvQuestionInfoAnswers.layoutManager = manager
         val adapter = QuestionAnswerAdapter(QuestionAnswerDiffCallback())
         binding.rvQuestionInfoAnswers.adapter = adapter
-        adapter.submitList(//提交一个新列表进行比较和显示。
-            question.answer.toList()
-        )
 
+        val request = NetConstant.retrofit.create(CommunityService::class.java)
+        val repository = CommunityRepository(request)
+        viewModel.repository = repository
+
+        viewModel.answers.observe(viewLifecycleOwner) {
+            adapter.submitList(                                     //提交一个新列表进行比较和显示。
+                it
+            )
+        }
+        viewModel.getAnswer ()
     }
 
     companion object {
+        const val TAG:String = "QuestionInfoFragmentTAG"
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

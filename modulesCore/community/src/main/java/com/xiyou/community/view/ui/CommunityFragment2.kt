@@ -3,6 +3,7 @@ package com.xiyou.community.view.ui
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.xiyou.advance.modulespublic.common.constant.NetConstant
 import com.xiyou.community.R
 import com.xiyou.community.databinding.FragmentCommunityBinding
 import com.xiyou.community.net.CommunityService
@@ -33,16 +35,22 @@ private const val ARG_PARAM2 = "param2"
 class CommunityFragment2 : Fragment() {
 
 //    private val viewModel: QuestionInfoViewModel by viewModels()
-private lateinit var viewModel : QuestionInfoViewModel
+    private lateinit var viewModel : QuestionInfoViewModel
     private lateinit var binding: FragmentCommunityBinding
+    private lateinit var repository: CommunityRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider.NewInstanceFactory().create(QuestionInfoViewModel::class.java)
+//        viewModel = ViewModelProvider.NewInstanceFactory().create(QuestionInfoViewModel::class.java)
+        viewModel = ViewModelProvider(this ,
+            ViewModelProvider.NewInstanceFactory()).get(QuestionInfoViewModel::class.java)
+        val service = NetConstant.retrofit.create(CommunityService::class.java)
+        repository = CommunityRepository(service)
+        viewModel.repository = repository
 //        ViewModelProvider(this ,
 //            ViewModelProvider.NewInstanceFactory()).get(QuestionInfoViewModel::class.java)
-        viewModel.getAllQuestion({},{})
+        viewModel.getAllQuestion2({ },{})
     }
 
     override fun onCreateView(
@@ -86,6 +94,7 @@ private lateinit var viewModel : QuestionInfoViewModel
     }
 
     companion object {
+        const val TAG:String = "CommunityFragmentTAG"
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

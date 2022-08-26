@@ -35,16 +35,22 @@ data class QuestionCard(
         return true
     }
 
-    override fun hashCode(): Int {
-        var result = head.hashCode()
-        result = 31 * result + title.hashCode()
-        result = 31 * result + date.hashCode()
-        result = 31 * result + user.hashCode()
-        result = 31 * result + id
-        result = 31 * result + solved.hashCode()
-        result = 31 * result + answer.contentHashCode()
-        return result
+//    override fun hashCode(): Int {
+//        var result = head.hashCode()
+//        result = 31 * result + title.hashCode()
+//        result = 31 * result + date.hashCode()
+//        result = 31 * result + user.hashCode()
+//        result = 31 * result + id
+//        result = 31 * result + solved.hashCode()
+//        result = 31 * result + answer.contentHashCode()
+//        return result
+//    }
+
+    override fun toString(): String {
+        return "QuestionCard(head='$head', title='$title', comment='$comment', date='$date', user='$user', id=$id, solved=$solved, answer=${answer.contentToString()})"
     }
+
+
 }
 
 
